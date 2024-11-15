@@ -1,4 +1,4 @@
-import { Frame, FileEntry } from '../types';
+import { Frame, FileEntry } from './index.ts';
 import Papa from 'papaparse';
 
 export const exportToCSV = (frames: Frame[]): string => {
