@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Plus, Download, Eye, Upload, Sun, Moon } from 'lucide-react';
-import { StoryboardFrame } from './components/StoryboardFrame';
-import { Preview } from './components/Preview';
-import { ImportDialog } from './components/ImportDialog';
-import { Frame } from './types';
-import { exportToCSV, importFromCSV } from './utils/csv';
+import { StoryboardFrame } from './StoryboardFrame.tsx';
+import { Preview } from './Preview.tsx';
+import { ImportDialog } from './ImportDialog.tsx';
+import { Frame } from './index.ts';
+import { exportToCSV, importFromCSV } from './csv.ts';
 
 function App() {
   const [frames, setFrames] = useState<Frame[]>([]);
