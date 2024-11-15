@@ -1,7 +1,7 @@
 import React from 'react';
 import { Trash2, ChevronLeft, ChevronRight, Clock } from 'lucide-react';
-import { Frame } from '../types';
-import { FileList } from './FileList';
+import { Frame } from './index.ts';
+import { FileList } from './FileList.tsx';
 
 interface StoryboardFrameProps {
   index: number;
