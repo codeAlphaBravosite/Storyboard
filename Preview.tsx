@@ -1,5 +1,5 @@
 import React from 'react';
-import { Frame } from '../types';
+import { Frame } from './index.ts';
 import { Clock, X } from 'lucide-react';
 
 interface PreviewProps {
