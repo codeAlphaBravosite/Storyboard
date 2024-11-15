@@ -1,6 +1,6 @@
 import React from 'react';
 import { Plus, Trash2, Clock } from 'lucide-react';
-import { FileEntry } from '../types';
+import { FileEntry } from './index.ts';
 
 interface FileListProps {
   files: FileEntry[];
