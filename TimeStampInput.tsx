@@ -1,5 +1,5 @@
 import React from 'react';
-import { TimeStamp } from '../types';
+import { TimeStamp } from './index.ts';
 
 interface TimeStampInputProps {
   value: TimeStamp;
