@@ -1,6 +1,6 @@
-import { loadHomePage } from '../storyboard.js';
-import { loadEditorPage } from '../scene.js';
-import { loadPreviewPage } from '../preview.js';
+import { loadHomePage } from './storyboard.js';
+import { loadEditorPage } from './scene.js';
+import { loadPreviewPage } from './preview.js';
 
 export function setupNavigation() {
   window.addEventListener('hashchange', handleRoute);
