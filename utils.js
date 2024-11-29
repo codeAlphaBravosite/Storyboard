@@ -10,28 +10,6 @@ export function formatDate(date) {
 export function showPage(pageId) {
   document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
   document.getElementById(pageId).classList.add('active');
-  updateNavigation(pageId);
-}
-
-// Add this new function
-export function updateNavigation(page) {
-  // Hide all nav contents first
-  document.getElementById('mainNav').classList.add('hidden');
-  document.getElementById('editorNav').classList.add('hidden');
-  document.getElementById('previewNav').classList.add('hidden');
-
-  // Show the appropriate nav based on page
-  switch (page) {
-    case 'homePage':
-      document.getElementById('mainNav').classList.remove('hidden');
-      break;
-    case 'editorPage':
-      document.getElementById('editorNav').classList.remove('hidden');
-      break;
-    case 'previewPage':
-      document.getElementById('previewNav').classList.remove('hidden');
-      break;
-  }
 }
 
 export function createElementWithClass(tag, className) {
