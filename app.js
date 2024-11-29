@@ -25,10 +25,11 @@ document.addEventListener('DOMContentLoaded', () => {
         
         <div class="storyboard-metadata">
           <p>
-            Last edited: ${formatDate(storyboard.lastEdited || new Date())}
-          </p>
-          <p>
             Scenes: ${(storyboard.scenes || []).length}
+          </p>
+          
+          <p>
+            Last edited: ${formatDate(storyboard.lastEdited || new Date())}
           </p>
         </div>
 
