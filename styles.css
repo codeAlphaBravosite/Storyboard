@@ -426,7 +426,7 @@ textarea:focus {
 .scene-banner {
   /* background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));*/
   padding: 2rem 1.5rem;
-  color: #444444;
+  color: #5C5C5C;
   background: #F5F5F5;
   text-align: center;
   position: relative;
