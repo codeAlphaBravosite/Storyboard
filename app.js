@@ -79,8 +79,8 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   document.getElementById('backToHomeFromEditor')?.addEventListener('click', () => {
-      renderStoryboardsList();
-      showPage('homePage');
+    renderStoryboardsList();
+    showPage('homePage');
   });
 
   document.getElementById('backToHomeFromPreview')?.addEventListener('click', () => {
