@@ -1,4 +1,4 @@
-import { createStoryboard } from './models/types.js';
+import { createStoryboard } from './types.js';
 import { showPage, sanitizeHTML, formatDate, createElementWithClass } from './utils.js';
 import { storage } from './storage.js';
 import { SceneManager } from './scenes.js';
