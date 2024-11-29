@@ -129,13 +129,15 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   document.getElementById('exportBtn')?.addEventListener('click', () => {
-    if (previewManager.currentStoryboard) {
-      const success = storage.exportToCsv(previewManager.currentStoryboard);
-      if (!success) {
-        alert('Error exporting storyboard. Please try again.');
-      }
+  if (previewManager.currentStoryboard) {
+    const success = storage.exportToCsv(previewManager.currentStoryboard);
+    if (!success) {
+      alert('Error exporting storyboard. Please check the console for details.');
     }
-  });
+  } else {
+    alert('No storyboard available to export.');
+  }
+});
 
   // Initialize the home page
   renderStoryboardsList();
