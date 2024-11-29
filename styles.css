@@ -103,7 +103,6 @@ body {
 
 .navbar {
   background-color: var(--card-background);
-  box-shadow: var(--shadow);
   padding: 1rem 0;
   margin-bottom: 2rem;
   z-index: 100;
