@@ -25,18 +25,9 @@ document.addEventListener('DOMContentLoaded', () => {
         
         <div class="storyboard-metadata">
           <p>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
-              <circle cx="12" cy="12" r="10"/>
-              <path d="M12 6v6l4 2"/>
-            </svg>
             Last edited: ${formatDate(storyboard.lastEdited || new Date())}
           </p>
           <p>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
-              <path d="M21 8v13H3V8"/>
-              <path d="M1 3h22v5H1z"/>
-              <path d="M10 12h4"/>
-            </svg>
             Scenes: ${(storyboard.scenes || []).length}
           </p>
         </div>
