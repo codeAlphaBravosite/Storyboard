@@ -140,13 +140,13 @@ body {
 }
 
 .editor-header {
-  position: sticky;
-  top: 72px;
+  position: relative;
+  top: auto;
   background-color: var(--background-color);
   padding: 1rem 0;
   margin-bottom: 1.5rem;
-  z-index: 90;
-  backdrop-filter: blur(8px);
+  z-index: auto;
+  backdrop-filter: none;
   border-bottom: 1px solid var(--border-color);
 }
 
@@ -470,8 +470,8 @@ textarea:focus {
   }
 
   .editor-header, .preview-header {
-    position: sticky;
-    top: 140px;
+    position: relative;
+    top: auto;
   }
 
   .editor-title, .preview-title {
