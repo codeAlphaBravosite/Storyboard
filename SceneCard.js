@@ -1,4 +1,4 @@
-import { sanitizeHTML } from '../utils.js';
+import { sanitizeHTML } from './utils.js';
 
 export function renderScene(scene) {
   const sceneElement = document.createElement('div');
