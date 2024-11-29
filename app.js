@@ -79,8 +79,8 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   document.getElementById('backToHomeFromEditor')?.addEventListener('click', () => {
-    renderStoryboardsList();
-    showPage('homePage');
+      renderStoryboardsList();
+      showPage('homePage');
   });
 
   document.getElementById('backToHomeFromPreview')?.addEventListener('click', () => {
@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('backToEditBtn')?.addEventListener('click', () => {
     showPage('editorPage');
   });
-
+  
   // Action Event Listeners
   document.getElementById('createNewBtn')?.addEventListener('click', () => {
     const newStoryboard = createStoryboard();
