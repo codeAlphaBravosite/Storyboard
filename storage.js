@@ -1,4 +1,4 @@
-import { createFile, createScene, createStoryboard } from './models/types.js';
+import { createFile, createScene, createStoryboard } from './types.js';
 
 // Storage management with error handling
 const STORAGE_KEY = 'storyboards';
