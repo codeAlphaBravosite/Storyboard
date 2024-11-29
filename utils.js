@@ -7,13 +7,6 @@ export function formatDate(date) {
   return new Date(date).toLocaleString();
 }
 
-// Find this function
-export function showPage(pageId) {
-  document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
-  document.getElementById(pageId).classList.add('active');
-}
-
-// Replace it with this updated version
 export function showPage(pageId) {
   document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
   document.getElementById(pageId).classList.add('active');
