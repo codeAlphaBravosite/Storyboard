@@ -96,8 +96,11 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   document.getElementById('backToEditBtn')?.addEventListener('click', () => {
-    showPage('editorPage');
-  });
+    if (sceneManager.currentStoryboard) {
+        sceneManager.loadStoryboard(sceneManager.currentStoryboard); // Load the editor with the current storyboard.
+    }
+    showPage('editorPage'); // Navigate to the editor page.
+});
   
   // Action Event Listeners
   document.getElementById('createNewBtn')?.addEventListener('click', () => {
