@@ -1,7 +1,7 @@
-import { createFile, createScene } from './models/types.js';
+import { createFile, createScene } from './types.js';
 import { debounce } from './utils.js';
 import { storage } from './storage.js';
-import { renderScene, renderFile } from './components/SceneCard.js';
+import { renderScene, renderFile } from './SceneCard.js';
 
 export class SceneManager {
   constructor() {
