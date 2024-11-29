@@ -40,8 +40,6 @@ body {
   padding: 0 1.5rem;
 }
 
-/* Add these styles at the end of styles.css */
-
 .storyboards-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -112,29 +110,11 @@ body {
   border-bottom: 1px solid var(--border-color);
 }
 
-/* Find this section */
 .nav-content {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
-}
-
-/* Add these new styles after it */
-.nav-editor,
-.nav-preview {
-  display: none;
-}
-
-.hidden {
-  display: none;
-}
-
-/* Back button styling */
-.btn-text span {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
 }
 
 .nav-links {
