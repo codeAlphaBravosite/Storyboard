@@ -236,10 +236,6 @@ body {
 .title-input {
   font-size: 1.25rem;
   font-weight: 600;
-  white-space: normal; /* Makes the text wrap naturally */
-  word-wrap: break-word; /* Prevents long words from breaking the layout */
-  line-height: 1.5; /* Adds better spacing between lines */
-  text-align: left;
   padding: 0.5rem;
   border: none;
   background: transparent;
