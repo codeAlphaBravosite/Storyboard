@@ -9,50 +9,75 @@ document.addEventListener('DOMContentLoaded', () => {
   const previewManager = new PreviewManager();
 
   function renderStoryboardsList() {
-    const storyboards = storage.getStoryboards();
-    const container = document.getElementById('storyboardsList');
-    if (!container) return;
+  const storyboards = storage.getStoryboards();
+  const container = document.getElementById('storyboardsList');
+  if (!container) return;
 
-    container.innerHTML = storyboards.length ? '' : '<p class="empty-state">No storyboards yet. Create one to get started!</p>';
+  container.innerHTML = storyboards.length ? '' : 
+    '<p class="empty-state">No storyboards yet. Create one to get started!</p>';
 
-    storyboards
-      .filter(storyboard => storyboard && storyboard.id)
-      .forEach(storyboard => {
-        const card = createElementWithClass('div', 'storyboard-card');
-        card.innerHTML = `
-          <h3>${sanitizeHTML(storyboard.title || 'Untitled Storyboard')}</h3>
-          <p>Last edited: ${formatDate(storyboard.lastEdited || new Date())}</p>
-          <p>Scenes: ${(storyboard.scenes || []).length}</p>
-          <div class="card-actions">
-            <button class="btn btn-primary edit-btn">Edit</button>
-            <button class="btn btn-secondary preview-btn">Preview</button>
-            <button class="btn btn-secondary delete-btn">Delete</button>
-          </div>
-        `;
+  storyboards
+    .filter(storyboard => storyboard && storyboard.id)
+    .forEach(storyboard => {
+      const card = createElementWithClass('div', 'storyboard-card');
+      card.innerHTML = `
+        <h3>${sanitizeHTML(storyboard.title || 'Untitled Storyboard')}</h3>
+        
+        <div class="storyboard-metadata">
+          <p>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M12 6v6l4 2"/>
+            </svg>
+            Last edited: ${formatDate(storyboard.lastEdited || new Date())}
+          </p>
+          <p>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+              <path d="M21 8v13H3V8"/>
+              <path d="M1 3h22v5H1z"/>
+              <path d="M10 12h4"/>
+            </svg>
+            Scenes: ${(storyboard.scenes || []).length}
+          </p>
+        </div>
 
-        card.querySelector('.edit-btn')?.addEventListener('click', () => {
-          if (storyboard) {
-            sceneManager.loadStoryboard(storyboard);
-            showPage('editorPage');
-          }
-        });
+        <div class="card-actions">
+          <button class="btn btn-primary edit-btn">
+            Edit Storyboard
+          </button>
+          <button class="btn btn-secondary preview-btn">
+            Preview
+          </button>
+          <button class="btn btn-text delete-btn">
+            Delete
+          </button>
+        </div>
+      `;
 
-        card.querySelector('.preview-btn')?.addEventListener('click', () => {
-          if (storyboard) {
-            previewManager.renderPreview(storyboard);
-            showPage('previewPage');
-          }
-        });
-
-        card.querySelector('.delete-btn')?.addEventListener('click', () => {
-          if (storyboard && storyboard.id && confirm('Are you sure you want to delete this storyboard?')) {
-            storage.deleteStoryboard(storyboard.id);
-            renderStoryboardsList();
-          }
-        });
-
-        container.appendChild(card);
+      // Add the event listeners
+      card.querySelector('.edit-btn').addEventListener('click', () => {
+        if (storyboard) {
+          sceneManager.loadStoryboard(storyboard);
+          showPage('editorPage');
+        }
       });
+
+      card.querySelector('.preview-btn').addEventListener('click', () => {
+        if (storyboard) {
+          previewManager.renderPreview(storyboard);
+          showPage('previewPage');
+        }
+      });
+
+      card.querySelector('.delete-btn').addEventListener('click', () => {
+        if (storyboard && storyboard.id && confirm('Are you sure you want to delete this storyboard?')) {
+          storage.deleteStoryboard(storyboard.id);
+          renderStoryboardsList();
+        }
+      });
+
+      container.appendChild(card);
+    });
   }
 
   // Navigation Event Listeners
