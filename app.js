@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
     showPage('editorPage');
   });
 
-  document.getElementById('importFile')?.addEventListener('change', async (e) => {
+document.getElementById('importFile')?.addEventListener('change', async (e) => {
   const file = e.target?.files?.[0];
   if (!file) {
     alert('Please select a file to import');
@@ -130,6 +130,11 @@ document.addEventListener('DOMContentLoaded', () => {
       storage.addStoryboard(storyboard);
       renderStoryboardsList();
       e.target.value = '';
+      
+      // Show preview of imported storyboard
+      previewManager.renderPreview(storyboard);
+      showPage('previewPage');
+      
       alert(`Successfully imported storyboard: ${storyboard.title}`);
     }
   } catch (error) {
