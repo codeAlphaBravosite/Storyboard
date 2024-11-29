@@ -130,6 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.getElementById('exportBtn')?.addEventListener('click', () => {
     if (previewManager.currentStoryboard) {
+      sceneManager.loadStoryboard(previewManager.currentStoryboard);
       const success = storage.exportToCsv(previewManager.currentStoryboard);
       if (!success) {
         alert('Error exporting storyboard. Please try again.');
