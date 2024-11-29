@@ -94,41 +94,65 @@ export const storage = {
 
   importFromCsv(file) {
     return new Promise((resolve, reject) => {
+      if (!file) {
+        reject(new Error('No file provided'));
+        return;
+      }
+
+      // Get the file name without extension to use as storyboard title
+      const fileName = file.name.replace(/\.[^/.]+$/, '');
+      
       const reader = new FileReader();
       
       reader.onload = (e) => {
         try {
           const text = e.target.result;
           const rows = text.split('\n')
-            .map(row => row.split(',')
-              .map(cell => cell.trim().replace(/^"|"$/g, '').replace(/""/g, '"'))
+            .map(row => 
+              row.split(',')
+                .map(cell => cell.trim().replace(/^"|"$/g, '').replace(/""/g, '"'))
             )
-            .filter(row => row.length === 4);
+            .filter(row => row.length === 4 && row.some(cell => cell.length > 0)); // Filter empty rows
           
           if (rows.length < 2) {
             throw new Error('Invalid CSV format: No valid data rows found');
           }
           
+          // Remove header row
           rows.shift();
           
-          const scenes = rows.map((row, index) => ({
-            ...createScene(index + 1),
-            voScript: row[1] || '',
-            files: row[2] ? row[2].split(';').map(file => ({
-              ...createFile(),
-              name: file.split('(')[0].trim(),
-              timestamp: file.split('(')[1]?.replace(')', '').trim() || '',
-              isFinal: true
-            })) : [],
-            notes: row[3] || ''
-          }));
+          const scenes = rows
+            .filter(row => row[0]) // Filter rows without scene numbers
+            .map(row => {
+              const sceneNumber = parseInt(row[0]) || 0;
+              return {
+                ...createScene(sceneNumber),
+                voScript: row[1] || '',
+                files: row[2] ? row[2].split(';').map(fileStr => {
+                  const fileMatch = fileStr.trim().match(/(.*?)\s*\((.*?)\)/);
+                  return {
+                    ...createFile(),
+                    name: fileMatch ? fileMatch[1].trim() : fileStr.trim(),
+                    timestamp: fileMatch ? fileMatch[2].trim() : new Date().toLocaleString(),
+                    isFinal: true
+                  };
+                }) : [],
+                notes: row[3] || ''
+              };
+            })
+            .sort((a, b) => a.number - b.number); // Sort scenes by number
+
+          if (scenes.length === 0) {
+            throw new Error('No valid scenes found in the CSV file');
+          }
 
           resolve({
-            ...createStoryboard('Imported Storyboard'),
-            scenes
+            ...createStoryboard(fileName), // Use filename as storyboard title
+            scenes,
+            lastEdited: new Date().toISOString()
           });
         } catch (error) {
-          reject(new Error(`Invalid CSV format: ${error.message}`));
+          reject(new Error(`Error processing CSV: ${error.message}`));
         }
       };
 
@@ -136,4 +160,5 @@ export const storage = {
       reader.readAsText(file);
     });
   }
+
 };
