@@ -9,18 +9,43 @@
 </head>
 <body>
     <nav class="navbar">
-        <div class="container">
-            <div class="nav-content">
-                <h1 class="logo">Storyboard Creator</h1>
-                <div class="nav-links">
-                    <button id="homeBtn" class="btn btn-text">Home</button>
-                    <button id="createNewBtn" class="btn btn-primary">Create New</button>
-                    <label for="importFile" class="btn btn-secondary">Import</label>
-                    <input type="file" id="importFile" accept=".csv" hidden>
-                </div>
-            </div>
-        </div>
-    </nav>
+  <div class="container">
+    <!-- Main Navigation (Home Page) -->
+    <div class="nav-content" id="mainNav">
+      <h1 class="logo">Storyboard Creator</h1>
+      <div class="nav-links">
+        <button class="btn btn-text" id="homeBtn">Home</button>
+        <button class="btn btn-primary" id="createNewBtn">Create New</button>
+        <label class="btn btn-secondary">
+          Import
+          <input type="file" id="importFile" accept=".csv" style="display: none;">
+        </label>
+      </div>
+    </div>
+
+    <!-- Editor Navigation -->
+    <div class="nav-content nav-editor hidden" id="editorNav">
+      <button class="btn btn-text" id="backToHomeFromEditor">
+        <span>← Back</span>
+      </button>
+      <div class="nav-links">
+        <button class="btn btn-secondary" id="previewFromEditor">Preview</button>
+        <button class="btn btn-primary" id="saveChangesBtn">Save Changes</button>
+      </div>
+    </div>
+
+    <!-- Preview Navigation -->
+    <div class="nav-content nav-preview hidden" id="previewNav">
+      <button class="btn btn-text" id="backToHomeFromPreview">
+        <span>← Back</span>
+      </button>
+      <div class="nav-links">
+        <button class="btn btn-secondary" id="backToEditBtn">Edit</button>
+        <button class="btn btn-primary" id="exportBtn">Export</button>
+      </div>
+    </div>
+  </div>
+</nav>
 
     <main class="container">
         <div id="homePage" class="page active">
