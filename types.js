@@ -1,5 +1,5 @@
 // Type definitions for better code organization
-export const createFile = (name = '', timestamp = '00:00:00') => ({
+export const createFile = (name = '', timestamp = '00:00:00 - 00:00:00') => ({
   id: generateId(),
   name,
   timestamp,
