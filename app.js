@@ -99,6 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (storyboard) {
           sceneManager.loadStoryboard(storyboard);
           showPage('editorPage');
+    }
 });
   
   // Action Event Listeners
