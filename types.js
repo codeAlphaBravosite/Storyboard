@@ -14,7 +14,7 @@ export const createScene = (number) => ({
   notes: ''
 });
 
-export const createStoryboard = (title = 'Untitled Storyboard') => ({
+export const createStoryboard = (title = 'Untitled') => ({
   id: generateId(),
   title,
   scenes: [],
