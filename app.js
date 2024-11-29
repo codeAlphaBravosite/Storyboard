@@ -3,6 +3,8 @@ import { showPage, sanitizeHTML, formatDate, createElementWithClass } from './ut
 import { storage } from './storage.js';
 import { SceneManager } from './scenes.js';
 import { PreviewManager } from './preview.js';
+import { ToastManager } from './toast.js';
+const toast = new ToastManager();
 
 document.addEventListener('DOMContentLoaded', () => {
   const sceneManager = new SceneManager();
@@ -113,13 +115,13 @@ document.addEventListener('DOMContentLoaded', () => {
 document.getElementById('importFile')?.addEventListener('change', async (e) => {
   const file = e.target?.files?.[0];
   if (!file) {
-    alert('Please select a file to import');
+    toast.error('Please select a file to import');
     return;
   }
 
   // Check file extension
   if (!file.name.toLowerCase().endsWith('.csv')) {
-    alert('Please select a CSV file');
+    toast.error('Please select a CSV file');
     e.target.value = '';
     return;
   }
@@ -135,10 +137,10 @@ document.getElementById('importFile')?.addEventListener('change', async (e) => {
       previewManager.renderPreview(storyboard);
       showPage('previewPage');
       
-      alert(`Successfully imported storyboard: ${storyboard.title}`);
+      toast.success(`Successfully imported storyboard: ${storyboard.title}`);
     }
   } catch (error) {
-    alert(`Import failed: ${error.message}`);
+    toast.error(`Import failed: ${error.message}`);
     console.error('Import error:', error);
   } finally {
     e.target.value = ''; // Clear the input
@@ -149,10 +151,10 @@ document.getElementById('importFile')?.addEventListener('change', async (e) => {
   if (previewManager.currentStoryboard) {
     const success = storage.exportToCsv(previewManager.currentStoryboard);
     if (!success) {
-      alert('Error exporting storyboard. Please check the console for details.');
+      toast.error('Error exporting storyboard. Please check the console for details.');
     }
   } else {
-    alert('No storyboard available to export.');
+    toast.error('No storyboard available to export.');
   }
 });
 
