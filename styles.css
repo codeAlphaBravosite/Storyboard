@@ -539,7 +539,7 @@ textarea:focus {
   }
 
   .nav-links {
-    width: 40%;
+    width: 80%;
     flex-wrap: wrap;
     justify-content: center;
   }
@@ -567,7 +567,7 @@ textarea:focus {
   }
 
   .btn {
-    width: 40%;
+    width: 100%;
   }
 
   .card-actions {
