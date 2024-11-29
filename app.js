@@ -62,10 +62,8 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   document.getElementById('backToHomeFromEditor')?.addEventListener('click', () => {
-    if (confirm('Any unsaved changes will be lost. Continue?')) {
       renderStoryboardsList();
       showPage('homePage');
-    }
   });
 
   document.getElementById('backToHomeFromPreview')?.addEventListener('click', () => {
