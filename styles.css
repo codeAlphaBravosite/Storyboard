@@ -436,7 +436,6 @@ textarea:focus {
 .scene-banner::before {
   content: '';
   position: absolute;
-  background: #f0f0f0;
   top: 0;
   left: 0;
   right: 0;
