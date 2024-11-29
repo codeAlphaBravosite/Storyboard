@@ -96,8 +96,8 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   document.getElementById('backToEditBtn')?.addEventListener('click', () => {
-    if (storyboard) {
-          sceneManager.loadStoryboard(storyboard);
+    if (sceneManager.currentStoryboard) {
+          sceneManager.loadStoryboard(sceneManager.currentStoryboard);
           showPage('editorPage');
     }
 });
