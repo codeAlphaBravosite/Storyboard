@@ -427,7 +427,7 @@ textarea:focus {
   /* background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));*/
   padding: 2rem 1.5rem;
   color: #333333;
-  background: #f0f0f0;
+  background: #e0e0e0;
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -447,7 +447,7 @@ textarea:focus {
 .scene-number {
   font-size: 1.5rem;
   font-weight: 700;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  /*text-shadow: 0 2px 4px rgba(0,0,0,0.1);*/
   letter-spacing: 0.025em;
 }
 
