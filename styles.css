@@ -424,9 +424,10 @@ textarea:focus {
 }
 
 .scene-banner {
-  background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+  /* background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));*/
   padding: 2rem 1.5rem;
-  color: white;
+  color: #333333;
+  background-color: #f0f0f0;
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -435,11 +436,13 @@ textarea:focus {
 .scene-banner::before {
   content: '';
   position: absolute;
+  color: #333333;
+  background-color: #f0f0f0;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
+ /* background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%); */
   pointer-events: none;
 }
 
