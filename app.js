@@ -111,23 +111,35 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   document.getElementById('importFile')?.addEventListener('change', async (e) => {
-    const file = e.target?.files?.[0];
-    if (!file) return;
+  const file = e.target?.files?.[0];
+  if (!file) {
+    alert('Please select a file to import');
+    return;
+  }
 
-    try {
-      const storyboard = await storage.importFromCsv(file);
-      if (storyboard && storyboard.id) {
-        storage.addStoryboard(storyboard);
-        renderStoryboardsList();
-        e.target.value = '';
-        alert('Storyboard imported successfully!');
-      }
-    } catch (error) {
-      alert('Error importing file: ' + error.message);
-      console.error('Import error:', error);
+  // Check file extension
+  if (!file.name.toLowerCase().endsWith('.csv')) {
+    alert('Please select a CSV file');
+    e.target.value = '';
+    return;
+  }
+
+  try {
+    const storyboard = await storage.importFromCsv(file);
+    if (storyboard && storyboard.id) {
+      storage.addStoryboard(storyboard);
+      renderStoryboardsList();
+      e.target.value = '';
+      alert(`Successfully imported storyboard: ${storyboard.title}`);
     }
-  });
-
+  } catch (error) {
+    alert(`Import failed: ${error.message}`);
+    console.error('Import error:', error);
+  } finally {
+    e.target.value = ''; // Clear the input
+  }
+});
+  
   document.getElementById('exportBtn')?.addEventListener('click', () => {
   if (previewManager.currentStoryboard) {
     const success = storage.exportToCsv(previewManager.currentStoryboard);
