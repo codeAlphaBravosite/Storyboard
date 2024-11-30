@@ -2,6 +2,8 @@ import { createFile, createScene } from './types.js';
 import { debounce } from './utils.js';
 import { storage } from './storage.js';
 import { renderScene, renderFile } from './SceneCard.js';
+import { DialogManager } from './dialog.js';
+const dialog = new DialogManager();
 
 export class SceneManager {
   constructor() {
