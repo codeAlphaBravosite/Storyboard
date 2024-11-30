@@ -145,7 +145,7 @@ export class SceneManager {
     this.autoSave();
   }
 
-  async deleteScene(sceneId) {
+  deleteScene(sceneId) {
     const confirmed = await dialog.confirm({
         title: 'Delete Scene',
         message: 'Are you sure you want to delete this scene? This action cannot be undone.',
