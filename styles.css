@@ -254,7 +254,7 @@ body {
   margin-bottom: 1rem;
   box-shadow: var(--shadow);
   border: 1px solid var(--border-color);
-  cursor: move;
+ /* cursor: move;*/
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
@@ -263,11 +263,13 @@ body {
   box-shadow: var(--shadow-lg);
 }
 
+/*
 .scene-card.dragging {
   opacity: 0.5;
   background-color: var(--background-color);
   transform: scale(1.02);
 }
+*/
 
 .scene-header {
   display: flex;
