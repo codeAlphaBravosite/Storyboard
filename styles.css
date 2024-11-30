@@ -254,8 +254,63 @@ body {
   margin-bottom: 1rem;
   box-shadow: var(--shadow);
   border: 1px solid var(--border-color);
-  cursor: move;
-  transition: transform 0.2s, box-shadow 0.2s;
+  /*cursor: move;
+  transition: transform 0.2s, box-shadow 0.2s;*/
+  transition: none;
+  /* Force solid background and full opacity */
+  opacity: 1 !important;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Remove all hover effects on mobile */
+@media (hover: none) and (pointer: coarse) {
+  .scene-card,
+  .scene-card:hover,
+  .scene-card:active,
+  .scene-card:focus,
+  .scene-card:focus-within,
+  .scene-card.dragging {
+    transform: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    background-color: var(--card-background) !important;
+    box-shadow: var(--shadow) !important;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Ensure all child elements maintain opacity */
+  .scene-card *,
+  .scene-card *:hover,
+  .scene-card *:active,
+  .scene-card *:focus {
+    opacity: 1 !important;
+    background-color: inherit;
+  }
+
+  /* Specifically target text inputs and textareas */
+  .scene-card textarea,
+  .scene-card input[type="text"] {
+    opacity: 1 !important;
+    background-color: var(--card-background) !important;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-user-select: text;
+    user-select: text;
+  }
+
+  /* Force solid background during selection/interaction */
+  .scene-card::selection,
+  .scene-card *::selection {
+    background-color: var(--card-background) !important;
+    opacity: 1 !important;
+  }
+}
+
+/* Keep hover effects only for desktop */
+@media (hover: hover) and (pointer: fine) {
+  .scene-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
 }
 
 .scene-card:hover {
