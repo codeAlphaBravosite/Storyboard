@@ -258,9 +258,48 @@ body {
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
+/* Modify hover effects to only work on non-touch devices */
+@media (hover: hover) and (pointer: fine) {
+  .scene-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+}
+
+/* Prevent hover effects on touch devices */
+@media (hover: none) and (pointer: coarse) {
+  .scene-card {
+    transform: none !important;
+    transition: none !important;
+  }
+
 .scene-card:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
+  transform: none !important;
+  box-shadow: var(--shadow) !important;
+}
+
+/* Prevent transparency during touch/long-press */
+  .scene-card:active,
+  .scene-card:focus-within {
+    transform: none !important;
+    opacity: 1 !important;
+    background-color: var(--card-background) !important;
+  }
+  
+  /* Ensure textareas and inputs maintain opacity during interaction */
+  .scene-card textarea:active,
+  .scene-card textarea:focus,
+  .scene-card input:active,
+  .scene-card input:focus {
+    opacity: 1 !important;
+    background-color: var(--card-background) !important;
+  }
+}
+
+/* Ensure consistent opacity for all states on mobile */
+.scene-card.dragging {
+  opacity: 1 !important;
+  background-color: var(--card-background) !important;
 }
 
 /*
@@ -297,9 +336,10 @@ body {
   font-size: 0.875rem;
 }
 
-/* Remove drag-and-drop related styles */
+/* Ensure consistent opacity for all states on mobile */
 .scene-card.dragging {
-  display: none;
+  opacity: 1 !important;
+  background-color: var(--card-background) !important;
 }
 
 .scene-content {
