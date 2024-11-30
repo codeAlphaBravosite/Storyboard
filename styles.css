@@ -263,11 +263,15 @@ body {
   box-shadow: var(--shadow-lg);
 }
 
+/*
+
 .scene-card.dragging {
   opacity: 0.5;
   background-color: var(--background-color);
   transform: scale(1.02);
 }
+
+*/
 
 .scene-header {
   display: flex;
