@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (storyboard && storyboard.id) {
         const confirmed = await dialog.confirm({
             title: 'Delete Storyboard',
-            message: 'Are you sure you want to delete this storyboard? This action cannot be undone.',
+            message: 'Are you sure?',
             confirmText: 'Delete',
             cancelText: 'Cancel'
         });
