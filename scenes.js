@@ -139,6 +139,7 @@ export class SceneManager {
             }
         }
     });
+  }
 
   addFile(sceneId) {
     const scene = this.currentStoryboard.scenes.find(s => s.id === sceneId);
