@@ -4,7 +4,9 @@ import { storage } from './storage.js';
 import { SceneManager } from './scenes.js';
 import { PreviewManager } from './preview.js';
 import { ToastManager } from './toast.js';
+import { DialogManager } from './dialog.js';
 const toast = new ToastManager();
+const dialog = new DialogManager();
 
 document.addEventListener('DOMContentLoaded', () => {
   const sceneManager = new SceneManager();
@@ -63,12 +65,22 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
 
-      card.querySelector('.delete-btn').addEventListener('click', () => {
-        if (storyboard && storyboard.id && confirm('Are you sure you want to delete this storyboard?')) {
-          storage.deleteStoryboard(storyboard.id);
-          renderStoryboardsList();
+      card.querySelector('.delete-btn').addEventListener('click', async () => {
+    if (storyboard && storyboard.id) {
+        const confirmed = await dialog.confirm({
+            title: 'Delete Storyboard',
+            message: 'Are you sure you want to delete this storyboard? This action cannot be undone.',
+            confirmText: 'Delete',
+            cancelText: 'Cancel'
+        });
+        
+        if (confirmed) {
+            storage.deleteStoryboard(storyboard.id);
+            renderStoryboardsList();
+            toast.info('Storyboard deleted successfully');
         }
-      });
+    }
+});
 
       container.appendChild(card);
     });
