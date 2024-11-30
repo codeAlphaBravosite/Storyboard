@@ -22,72 +22,47 @@ export class SceneManager {
     addSceneBtn?.addEventListener('click', () => this.addScene());
     saveBtn?.addEventListener('click', () => this.saveStoryboard());
     titleInput?.addEventListener('input', debounce(() => this.autoSave(), 1000));
-
-    this.setupDragAndDrop();
   }
 
-  setupDragAndDrop() {
-    const scenesList = document.getElementById('scenesList');
-    if (!scenesList) return;
+  moveScene(sceneId, direction) {
+    const scenes = this.currentStoryboard.scenes;
+    const currentIndex = scenes.findIndex(s => s.id === sceneId);
+    if (currentIndex === -1) return;
 
-    scenesList.addEventListener('dragstart', (e) => {
-      const sceneCard = e.target.closest('.scene-card');
-      if (!sceneCard) return;
-      
-      sceneCard.classList.add('dragging');
-      e.dataTransfer.setData('text/plain', sceneCard.dataset.id);
-    });
+    const newIndex = direction === 'up' ? currentIndex - 1 : currentIndex + 1;
+    if (newIndex < 0 || newIndex >= scenes.length) return;
 
-    scenesList.addEventListener('dragend', (e) => {
-      const sceneCard = e.target.closest('.scene-card');
-      if (sceneCard) {
-        sceneCard.classList.remove('dragging');
-      }
-    });
+    // Swap scenes in the array
+    [scenes[currentIndex], scenes[newIndex]] = [scenes[newIndex], scenes[currentIndex]];
 
-    scenesList.addEventListener('dragover', (e) => {
-      e.preventDefault();
-      const afterElement = this.getDragAfterElement(scenesList, e.clientY);
-      const draggable = document.querySelector('.dragging');
-      if (draggable) {
-        if (afterElement) {
-          scenesList.insertBefore(draggable, afterElement);
-        } else {
-          scenesList.appendChild(draggable);
-        }
-      }
-    });
+    // Update the DOM
+    const scenesContainer = document.getElementById('scenesList');
+    const sceneElements = Array.from(scenesContainer.children);
+    const currentElement = sceneElements[currentIndex];
+    const targetElement = sceneElements[newIndex];
 
-    scenesList.addEventListener('drop', (e) => {
-      e.preventDefault();
-      this.renumberScenes();
-      this.autoSave();
-    });
-  }
+    if (direction === 'up') {
+      scenesContainer.insertBefore(currentElement, targetElement);
+    } else {
+      scenesContainer.insertBefore(currentElement, targetElement.nextSibling);
+    }
 
-  getDragAfterElement(container, y) {
-    const draggableElements = [...container.querySelectorAll('.scene-card:not(.dragging)')];
-    
-    return draggableElements.reduce((closest, child) => {
-      const box = child.getBoundingClientRect();
-      const offset = y - box.top - box.height / 2;
-      
-      if (offset < 0 && offset > closest.offset) {
-        return { offset, element: child };
-      } else {
-        return closest;
-      }
-    }, { offset: Number.NEGATIVE_INFINITY }).element;
+    this.renumberScenes();
+    this.autoSave();
   }
 
   attachSceneEventListeners(sceneElement, scene) {
     const deleteBtn = sceneElement.querySelector('.delete-scene');
+    const upBtn = sceneElement.querySelector('.move-up');
+    const downBtn = sceneElement.querySelector('.move-down');
     const addFileBtn = sceneElement.querySelector('.add-file');
     const voScript = sceneElement.querySelector('.vo-script');
     const notes = sceneElement.querySelector('.scene-notes');
     const filesList = sceneElement.querySelector('.files-list');
 
     deleteBtn?.addEventListener('click', () => this.deleteScene(scene.id));
+    upBtn?.addEventListener('click', () => this.moveScene(scene.id, 'up'));
+    downBtn?.addEventListener('click', () => this.moveScene(scene.id, 'down'));
     addFileBtn?.addEventListener('click', () => this.addFile(scene.id));
     
     voScript?.addEventListener('input', debounce((e) => {
@@ -120,24 +95,24 @@ export class SceneManager {
     });
 
     filesList?.addEventListener('click', async (e) => {
-        if (e.target.closest('.delete-file')) {
-            const fileEntry = e.target.closest('.file-entry');
-            if (fileEntry) {
-                const confirmed = await dialog.confirm({
-                    title: 'Delete File',
-                    message: 'Are you sure?',
-                    confirmText: 'Delete',
-                    cancelText: 'Cancel'
-                });
+      if (e.target.closest('.delete-file')) {
+        const fileEntry = e.target.closest('.file-entry');
+        if (fileEntry) {
+          const confirmed = await dialog.confirm({
+            title: 'Delete File',
+            message: 'Are you sure?',
+            confirmText: 'Delete',
+            cancelText: 'Cancel'
+          });
 
-                if (confirmed) {
-                    const fileId = fileEntry.dataset.id;
-                    scene.files = scene.files.filter(f => f.id !== fileId);
-                    fileEntry.remove();
-                    this.autoSave();
-                }
-            }
+          if (confirmed) {
+            const fileId = fileEntry.dataset.id;
+            scene.files = scene.files.filter(f => f.id !== fileId);
+            fileEntry.remove();
+            this.autoSave();
+          }
         }
+      }
     });
   }
 
@@ -160,21 +135,20 @@ export class SceneManager {
 
   async deleteScene(sceneId) {
     const confirmed = await dialog.confirm({
-        title: 'Delete Scene',
-        message: 'Are you sure?',
-        confirmText: 'Delete',
-        cancelText: 'Cancel'
+      title: 'Delete Scene',
+      message: 'Are you sure?',
+      confirmText: 'Delete',
+      cancelText: 'Cancel'
     });
 
     if (confirmed) {
-        this.currentStoryboard.scenes = this.currentStoryboard.scenes.filter(s => s.id !== sceneId);
-        document.querySelector(`[data-id="${sceneId}"]`)?.remove();
-        this.autoSave();
-        toast.info('Scene deleted successfully');
-        this.renumberScenes();
+      this.currentStoryboard.scenes = this.currentStoryboard.scenes.filter(s => s.id !== sceneId);
+      document.querySelector(`[data-id="${sceneId}"]`)?.remove();
+      this.autoSave();
+      toast.info('Scene deleted successfully');
+      this.renumberScenes();
     }
-}
-
+  }
 
   addScene() {
     const newScene = createScene(this.currentStoryboard.scenes.length + 1);
@@ -192,22 +166,17 @@ export class SceneManager {
 
   renumberScenes() {
     const sceneElements = document.querySelectorAll('.scene-card');
-    const newSceneOrder = [];
-
     sceneElements.forEach((element, index) => {
       const sceneId = element.dataset.id;
       const scene = this.currentStoryboard.scenes.find(s => s.id === sceneId);
       if (scene) {
         scene.number = index + 1;
-        newSceneOrder.push(scene);
-        const hader = element.querySelector('h3');
+        const header = element.querySelector('h3');
         if (header) {
           header.textContent = `Scene ${scene.number}`;
         }
       }
     });
-
-    this.currentStoryboard.scenes = newSceneOrder;
   }
 
   loadStoryboard(storyboard) {
@@ -256,4 +225,4 @@ export class SceneManager {
     if (!this.currentStoryboard) return;
     this.saveStoryboard();
   }
-}
+    }
