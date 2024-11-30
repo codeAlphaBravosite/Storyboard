@@ -18,7 +18,7 @@ export function renderScene(scene) {
         <div class="scene-section-header">
           <span class="scene-section-title">VO/Script</span>
         </div>
-        <textarea class="vo-script" placeholder="Enter VO/Script content here...">${sanitizeHTML(scene.voScript)}</textarea>
+        <textarea class="vo-script" placeholder="Enter VO/Script content here...">${scene.voScript}</textarea>
       </div>
       
       <div class="scene-section">
@@ -35,13 +35,23 @@ export function renderScene(scene) {
         <div class="scene-section-header">
           <span class="scene-section-title">Notes</span>
         </div>
-        <textarea class="scene-notes" placeholder="Add any additional notes here...">${sanitizeHTML(scene.notes)}</textarea>
+        <textarea class="scene-notes" placeholder="Add any additional notes here...">${scene.notes}</textarea>
       </div>
     </div>
   `;
 
   return sceneElement;
 }
+
+// Add paste event listener to detect if paste is working
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('textarea').forEach((textarea) => {
+    textarea.addEventListener('paste', (e) => {
+      console.log('Pasting detected:', e.clipboardData.getData('text'));
+    });
+  });
+});
+
 
 export function renderFile(file) {
   return `
