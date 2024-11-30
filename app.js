@@ -149,7 +149,7 @@ document.getElementById('importFile')?.addEventListener('change', async (e) => {
       previewManager.renderPreview(storyboard);
       showPage('previewPage');
       
-      toast.success(`Successfully imported storyboard: ${storyboard.title}`);
+      toast.success(`Successfully Imported Storyboard: ${storyboard.title}`);
     }
   } catch (error) {
     toast.error(`Import failed: ${error.message}`);
