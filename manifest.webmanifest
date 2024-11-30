@@ -1,12 +1,12 @@
 {
-  "name": "Script Writer",
-  "short_name": "Script Writer",
-  "description": "A powerful writing app",
+  "name": "StoryboardPro",
+  "short_name": "StoryboardPro",
+  "description": "A powerful storyboarding app",
   "start_url": "./index.html",
   "scope": ".",
   "display": "standalone",
-  "background_color": "#0f172a",
-  "theme_color": "#0f172a",
+  "background_color": "#f8fafc",
+  "theme_color": "#f8fafc",
   "orientation": "natural",
   "categories": ["productivity", "utilities"],
   "icons": [
