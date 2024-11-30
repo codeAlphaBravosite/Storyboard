@@ -146,7 +146,7 @@ export class SceneManager {
   }
 
   deleteScene(sceneId) {
-    const dialog = async () => {
+    if (this.currentStoryboard && this.currentStoryboard.scenes) {
         const confirmed = await dialog.confirm({
             title: 'Delete Scene',
             message: 'Are you sure you want to delete this scene? This action cannot be undone.',
@@ -156,17 +156,12 @@ export class SceneManager {
         
         if (confirmed) {
             this.currentStoryboard.scenes = this.currentStoryboard.scenes.filter(s => s.id !== sceneId);
-            const sceneElement = document.querySelector(`[data-id="${sceneId}"]`);
-            if (sceneElement) {
-                sceneElement.remove();
-            }
+            document.querySelector(`[data-id="${sceneId}"]`)?.remove();
             this.renumberScenes();
             this.autoSave();
             toast.info('Scene deleted successfully');
         }
-    };
-    
-    dialog();
+    }
 }
 
   addScene() {
