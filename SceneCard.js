@@ -18,7 +18,7 @@ export function renderScene(scene) {
         <div class="scene-section-header">
           <span class="scene-section-title">VO/Script</span>
         </div>
-        <textarea class="vo-script" placeholder="Enter VO/Script content here..." oncopy="return true" onpaste="return true">${sanitizeHTML(scene.voScript)}</textarea>
+        <textarea class="vo-script" placeholder="Enter VO/Script content here...">${sanitizeHTML(scene.voScript)}</textarea>
       </div>
       
       <div class="scene-section">
