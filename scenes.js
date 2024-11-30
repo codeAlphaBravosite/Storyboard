@@ -3,6 +3,8 @@ import { debounce } from './utils.js';
 import { storage } from './storage.js';
 import { renderScene, renderFile } from './SceneCard.js';
 import { DialogManager } from './dialog.js';
+import { ToastManager } from './toast.js';
+const toast = new ToastManager();
 const dialog = new DialogManager();
 
 export class SceneManager {
