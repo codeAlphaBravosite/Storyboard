@@ -48,6 +48,18 @@ export const storage = {
     return this.saveStoryboards(filtered);
   },
 
+  // Add this new helper function here
+  escapeCSVField(field) {
+    if (field === null || field === undefined) {
+      return '';
+    }
+    const stringField = String(field);
+    if (stringField.includes(',') || stringField.includes('"') || stringField.includes('\n')) {
+      return `"${stringField.replace(/"/g, '""')}"`;
+    }
+    return stringField;
+  },
+
   exportToCsv(storyboard) {
     try {
       if (!storyboard || !storyboard.scenes) {
@@ -56,8 +68,16 @@ export const storage = {
         return false;
       }
 
-      const rows = [['Scene Number', 'VO/Script', 'Files', 'Notes']];
+      // Add BOM for Unicode support
+      let csvContent = '\ufeff';
       
+      // Create header
+      const header = ['Scene Number', 'VO/Script', 'Files', 'Notes']
+        .map(field => this.escapeCSVField(field))
+        .join(',');
+      csvContent += header + '\n';
+
+      // Add rows
       storyboard.scenes
         .filter(scene => scene)
         .forEach(scene => {
@@ -65,30 +85,29 @@ export const storage = {
             .filter(file => file && file.isFinal)
             .map(file => `${file.name || ''} (${file.timestamp || ''})`)
             .join('; ');
-        
-          rows.push([
+
+          const row = [
             scene.number || '',
             scene.voScript || '',
             finalFiles,
             scene.notes || ''
-          ]);
-      });
+          ].map(field => this.escapeCSVField(field)).join(',');
 
-      const csvContent = rows
-        .map(row => row.map(cell => `"${(cell || '').toString().replace(/"/g, '""')}"`).join(','))
-        .join('\n');
+          csvContent += row + '\n';
+        });
 
-      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      // Create blob with UTF-8 encoding
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8' });
       const url = URL.createObjectURL(blob);
       
       const a = document.createElement('a');
       a.href = url;
-      // Use the original title for the file name
       a.download = `${storyboard.title || 'Untitled Storyboard'}.csv`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
+      
       toast.success('Successfully Exported!');
       return true;
     } catch (error) {
@@ -105,29 +124,58 @@ export const storage = {
         return;
       }
 
-      // Get the file name without extension and clean it up
       const fileName = file.name
-        .replace(/\.csv$/i, '')  // Remove .csv extension
-        .replace(/_/g, ' ');     // Replace underscores with spaces
+        .replace(/\.csv$/i, '')
+        .replace(/_/g, ' ');
       
       const reader = new FileReader();
       
       reader.onload = (e) => {
         try {
-          const text = e.target.result;
-          const rows = text.split('\n')
-            .map(row => 
-              row.split(',')
-                .map(cell => cell.trim().replace(/^"|"$/g, '').replace(/""/g, '"'))
-            )
-            .filter(row => row.length === 4 && row.some(cell => cell.length > 0));
+          let text = e.target.result;
           
+          // Remove BOM if present
+          if (text.charCodeAt(0) === 0xFEFF) {
+            text = text.slice(1);
+          }
+
+          // Split into rows, handling quoted fields properly
+          const parseCSVRow = (row) => {
+            const fields = [];
+            let field = '';
+            let inQuotes = false;
+            
+            for (let i = 0; i < row.length; i++) {
+              const char = row[i];
+              
+              if (char === '"') {
+                if (inQuotes && row[i + 1] === '"') {
+                  field += '"';
+                  i++;
+                } else {
+                  inQuotes = !inQuotes;
+                }
+              } else if (char === ',' && !inQuotes) {
+                fields.push(field);
+                field = '';
+              } else {
+                field += char;
+              }
+            }
+            fields.push(field);
+            return fields;
+          };
+
+          const rows = text.split(/\r?\n/)
+            .map(row => parseCSVRow(row))
+            .filter(row => row.length === 4 && row.some(cell => cell.length > 0));
+
           if (rows.length < 2) {
             throw new Error('Invalid CSV format: No valid data rows found');
           }
-          
-          rows.shift();
-          
+
+          rows.shift(); // Remove header row
+
           const scenes = rows
             .filter(row => row[0])
             .map(row => {
@@ -163,8 +211,8 @@ export const storage = {
         }
       };
 
-      reader.onerror = () => reject(new Error('Error reading file'));
-      reader.readAsText(file);
+      // Use UTF-8 encoding for FileReader
+      reader.readAsText(file, 'UTF-8');
     });
   }
 
