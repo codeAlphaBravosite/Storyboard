@@ -1,4 +1,6 @@
 import { createFile, createScene, createStoryboard } from './types.js';
+import { ToastManager } from './toast.js';
+const toast = new ToastManager();
 
 // Storage management with error handling
 const STORAGE_KEY = 'storyboards';
@@ -50,6 +52,7 @@ export const storage = {
     try {
       if (!storyboard || !storyboard.scenes) {
         console.error('Invalid storyboard data for export');
+        toast.error('Failed to export CSV: Invalid storyboard data.');
         return false;
       }
 
@@ -86,9 +89,11 @@ export const storage = {
       a.click();
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
+      toast.success('successfully exported!');
       return true;
     } catch (error) {
       console.error('Error exporting CSV:', error);
+      toast.error('Error exporting');
       return false;
     }
   },
