@@ -89,7 +89,7 @@ export const storage = {
       a.click();
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
-      toast.success('Successfully Exported!');
+      toast.success('Successfully Exported Storyboard: ${storyboard.title}');
       return true;
     } catch (error) {
       console.error('Error exporting CSV:', error);
