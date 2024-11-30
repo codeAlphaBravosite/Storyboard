@@ -255,8 +255,36 @@ body {
   box-shadow: var(--shadow);
   border: 1px solid var(--border-color);
  /* cursor: move;*/
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: none;
+  /* Force solid background and full opacity */
+  opacity: 1 !important;
+  -webkit-tap-highlight-color: transparent;
 }
+
+/* Remove all hover effects on mobile */
+@media (hover: none) and (pointer: coarse) {
+  .scene-card,
+  .scene-card:hover,
+  .scene-card:active,
+  .scene-card:focus,
+  .scene-card:focus-within,
+  .scene-card.dragging {
+    transform: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    background-color: var(--card-background) !important;
+    box-shadow: var(--shadow) !important;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+    /* Ensure all child elements maintain opacity */
+  .scene-card *,
+  .scene-card *:hover,
+  .scene-card *:active,
+  .scene-card *:focus {
+    opacity: 1 !important;
+    background-color: inherit;
+  }
 
 /* Modify hover effects to only work on non-touch devices */
 @media (hover: hover) and (pointer: fine) {
@@ -286,7 +314,7 @@ body {
     background-color: var(--card-background) !important;
   }
   
-  /* Ensure textareas and inputs maintain opacity during interaction */
+  /* Ensure textareas and inputs maintain opacity during interaction 
   .scene-card textarea:active,
   .scene-card textarea:focus,
   .scene-card input:active,
@@ -295,12 +323,32 @@ body {
     background-color: var(--card-background) !important;
   }
 }
+*/
+    /* Specifically target text inputs and textareas */
+  .scene-card textarea,
+  .scene-card input[type="text"] {
+    opacity: 1 !important;
+    background-color: var(--card-background) !important;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-user-select: text;
+    user-select: text;
+  }
 
-/* Ensure consistent opacity for all states on mobile */
+  /* Force solid background during selection/interaction */
+  .scene-card::selection,
+  .scene-card *::selection {
+    background-color: var(--card-background) !important;
+    opacity: 1 !important;
+  }
+}
+
+/* Ensure consistent opacity for all states on mobile 
 .scene-card.dragging {
   opacity: 1 !important;
   background-color: var(--card-background) !important;
 }
+
+  */
 
 /*
 .scene-card.dragging {
@@ -336,12 +384,12 @@ body {
   font-size: 0.875rem;
 }
 
-/* Ensure consistent opacity for all states on mobile */
+/* Ensure consistent opacity for all states on mobile 
 .scene-card.dragging {
   opacity: 1 !important;
   background-color: var(--card-background) !important;
 }
-
+*/
 .scene-content {
   display: grid;
   gap: 1.5rem;
