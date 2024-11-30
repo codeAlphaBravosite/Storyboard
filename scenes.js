@@ -147,7 +147,7 @@ export class SceneManager {
     this.autoSave();
   }
 
-  deleteScene(sceneId) {
+  async deleteScene(sceneId) {
     const confirmed = await dialog.confirm({
         title: 'Delete Scene',
         message: 'Are you sure you want to delete this scene? This action cannot be undone.',
@@ -162,7 +162,8 @@ export class SceneManager {
         this.autoSave();
         toast.info('Scene deleted successfully');
     }
-  }
+}
+
 
   addScene() {
     const newScene = createScene(this.currentStoryboard.scenes.length + 1);
