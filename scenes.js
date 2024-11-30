@@ -160,9 +160,9 @@ export class SceneManager {
     if (confirmed) {
         this.currentStoryboard.scenes = this.currentStoryboard.scenes.filter(s => s.id !== sceneId);
         document.querySelector(`[data-id="${sceneId}"]`)?.remove();
+        this.autoSave();
         toast.info('Scene deleted successfully');
         this.renumberScenes();
-        this.autoSave();
     }
 }
 
