@@ -161,7 +161,7 @@ export class SceneManager {
   async deleteScene(sceneId) {
     const confirmed = await dialog.confirm({
         title: 'Delete Scene',
-        message: 'Are you sure you want to delete this scene? This action cannot be undone.',
+        message: 'Are you sure?',
         confirmText: 'Delete',
         cancelText: 'Cancel'
     });
