@@ -286,6 +286,22 @@ body {
   color: var(--text-color);
 }
 
+.scene-actions {
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+}
+
+.scene-actions .btn-minimal {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+}
+
+/* Remove drag-and-drop related styles */
+.scene-card.dragging {
+  display: none;
+}
+
 .scene-content {
   display: grid;
   gap: 1.5rem;
