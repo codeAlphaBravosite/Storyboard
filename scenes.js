@@ -119,18 +119,26 @@ export class SceneManager {
       this.autoSave();
     });
 
-    filesList?.addEventListener('click', (e) => {
-      if (e.target.closest('.delete-file')) {
-        const fileEntry = e.target.closest('.file-entry');
-        if (fileEntry) {
-          const fileId = fileEntry.dataset.id;
-          scene.files = scene.files.filter(f => f.id !== fileId);
-          fileEntry.remove();
-          this.autoSave();
+    filesList?.addEventListener('click', async (e) => {
+        if (e.target.closest('.delete-file')) {
+            const fileEntry = e.target.closest('.file-entry');
+            if (fileEntry) {
+                const confirmed = await dialog.confirm({
+                    title: 'Delete File',
+                    message: 'Are you sure?',
+                    confirmText: 'Delete',
+                    cancelText: 'Cancel'
+                });
+
+                if (confirmed) {
+                    const fileId = fileEntry.dataset.id;
+                    scene.files = scene.files.filter(f => f.id !== fileId);
+                    fileEntry.remove();
+                    this.autoSave();
+                }
+            }
         }
-      }
     });
-  }
 
   addFile(sceneId) {
     const scene = this.currentStoryboard.scenes.find(s => s.id === sceneId);
