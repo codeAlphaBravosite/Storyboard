@@ -6,6 +6,11 @@
     <title>StoryboardPro</title>
     <link rel="stylesheet" href="./styles.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+    <link rel="icon" href="./icon-192x192.png" type="image/png">
+<link rel="shortcut icon" href="./icon-192x192.png" type="image/png">
+<link rel="apple-touch-icon" href="./icon-192x192.png">
+
+    <link rel="manifest" href="./manifest.webmanifest">
 </head>
 <body>
     <nav class="navbar">
@@ -70,5 +75,18 @@
     <script type="module" src="./scenes.js"></script>
     <script type="module" src="./preview.js"></script>
     <script type="module" src="./app.js"></script>
+    <script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js')
+        .then(registration => {
+          console.log('Service Worker registered successfully:', registration.scope);
+        })
+        .catch(error => {
+          console.log('Service Worker registration failed:', error);
+        });
+    });
+  }
+    </script>
 </body>
     </html>
