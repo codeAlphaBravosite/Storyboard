@@ -254,8 +254,8 @@ body {
   margin-bottom: 1rem;
   box-shadow: var(--shadow);
   border: 1px solid var(--border-color);
-  cursor: move;
-  transition: transform 0.2s, box-shadow 0.2s;
+ /* cursor: move;
+  transition: transform 0.2s, box-shadow 0.2s;*/
 }
 
 /*
@@ -397,6 +397,10 @@ textarea {
   background-color: var(--card-background);
   font-size: 0.9375rem;
   line-height: 1.6;
+  -webkit-user-select: text; /* iOS Safari */
+  -moz-user-select: text; /* Firefox */
+  -ms-user-select: text; /* Internet Explorer/Edge */
+  user-select: text; /* Standard syntax */
 }
 
 /*
