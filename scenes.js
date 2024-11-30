@@ -159,8 +159,8 @@ export class SceneManager {
         this.currentStoryboard.scenes = this.currentStoryboard.scenes.filter(s => s.id !== sceneId);
         document.querySelector(`[data-id="${sceneId}"]`)?.remove();
         this.renumberScenes();
-        toast.info('Scene deleted successfully');
         this.autoSave();
+        toast.info('Scene deleted successfully');
     }
 }
 
@@ -189,7 +189,7 @@ export class SceneManager {
       if (scene) {
         scene.number = index + 1;
         newSceneOrder.push(scene);
-        const header = element.querySelector('h3');
+        const hader = element.querySelector('h3');
         if (header) {
           header.textContent = `Scene ${scene.number}`;
         }
