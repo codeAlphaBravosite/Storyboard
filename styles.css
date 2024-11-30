@@ -102,7 +102,7 @@ body {
 }
 
 .navbar {
-  background-color: var(--card-background);
+  background-color: var(--background-color);
   padding: 1rem 0;
   margin-bottom: 1.5rem;
   z-index: 100;
