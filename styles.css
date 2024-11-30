@@ -254,8 +254,12 @@ body {
   margin-bottom: 1rem;
   box-shadow: var(--shadow);
   border: 1px solid var(--border-color);
-  cursor: move;
-  transition: transform 0.2s, box-shadow 0.2s;
+  /*cursor: move;
+  transition: transform 0.2s, box-shadow 0.2s;*/
+  -webkit-touch-callout: none; /* Prevent touch menu */
+  -webkit-tap-highlight-color: transparent; /* Remove tap highlight */
+  touch-action: pan-y; /* Only allow vertical scrolling */
+  user-select: none; /*
 }
 
 /*
@@ -397,6 +401,10 @@ textarea {
   background-color: var(--card-background);
   font-size: 0.9375rem;
   line-height: 1.6;
+  user-select: text;
+  -webkit-user-select: text;
+  touch-action: manipulation;
+  -webkit-touch-callout: default;
 }
 
 /*
