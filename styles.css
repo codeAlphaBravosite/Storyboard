@@ -521,11 +521,8 @@ textarea:focus {
 }
 
 .file-name {
-  color: #2C3E50;
-  margin-right: 12px;
   display: inline-block;
   vertical-align: middle;
-  max-width: 60%;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -533,7 +530,6 @@ textarea:focus {
 
 .timestamp-box {
   display: inline-block;
-  padding: 6px 12px;
   background-color: #F5F7FA;
   border: 1px solid #E0E6ED;
   border-radius: 6px;
@@ -541,7 +537,6 @@ textarea:focus {
   white-space: nowrap;
   vertical-align: middle;
   text-align: center;
-  width: 120px;
 }
 
 @media (max-width: 768px) {
