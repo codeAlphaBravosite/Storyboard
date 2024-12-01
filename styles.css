@@ -208,6 +208,7 @@ body {
   z-index: auto;
   backdrop-filter: none;
   border-bottom: 1px solid var(--border-color);
+  width: 100%;
 }
 
 .editor-nav {
@@ -215,6 +216,7 @@ body {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1.5rem;
+  width: 100%;
 }
 
 .editor-actions {
@@ -241,9 +243,6 @@ body {
   background: transparent;
   width: 100%;
   color: var(--text-color);
-  white-space: normal;
-  word-wrap: break-word;
-  overflow-wrap: anywhere;
 }
 
 .title-input:focus {
