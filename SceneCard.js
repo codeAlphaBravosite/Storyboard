@@ -9,8 +9,8 @@ export function renderScene(scene) {
   sceneElement.innerHTML = `
     <div class="scene-header">
       <h3>Scene ${scene.number}</h3>
-        <button class="btn-minimal move-up" title="Move Up">⬆</button>
-        <button class="btn-minimal move-down" title="Move Down">⬇</button>
+        <button class="btn-minimal move-up" title="Move Up">↑</button>
+        <button class="btn-minimal move-down" title="Move Down">↓</button>
       <button class="btn-minimal danger delete-scene">Delete Scene</button>
     </div>
     <div class="scene-content">
