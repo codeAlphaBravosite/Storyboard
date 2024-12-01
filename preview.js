@@ -42,8 +42,7 @@ export class PreviewManager {
       .map(file => `
       
       <div class="file-info">
-      <span class="file-name">${sanitizeHTML(file.name || '')}</span>
-      <span class="timestamp-box">${sanitizeHTML(file.timestamp || '')}</span>
+      ${sanitizeHTML(file.name || '')} <span class="timestamp-box">${sanitizeHTML(file.timestamp || '')}</span>
     </div>
     
     `)
