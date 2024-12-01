@@ -505,7 +505,7 @@ textarea:focus {
   /*text-align: left;*/
   font-family: 'Inter', monospace;
   background-color: var(--background-color); /* i added */
-  padding: 0.3rem; /* i added */
+  padding: 1rem; /* i added */
   border-radius: var(--radius); /* i added */
 }
 
@@ -527,12 +527,11 @@ textarea:focus {
   background-color: var(--background-color);
   border: 1px solid var(--border-color);
   border-radius: var(--radius);
-  margin-bottom: 0.25rem;
 }
 
-.file-info:last-child {
+/*.file-info:last-child {
   margin-bottom: 0;
-}
+}*/
 
 /*.file-name {
   font-family: 'Roboto', sans-serif;
