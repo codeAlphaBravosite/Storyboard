@@ -500,9 +500,9 @@ textarea:focus {
 }
 
 .section-content.files-list {
-  white-space: normal; /* Makes the text wrap naturally */
-  word-wrap: break-word; /* Prevents long words from breaking the layout */
-  text-align: left;
+  /*white-space: normal;*/ /* Makes the text wrap naturally */
+  /*word-wrap: break-word;*/ /* Prevents long words from breaking the layout */
+ /* text-align: left;*/
   font-family: 'Inter', monospace;
   background-color: var(--background-color); /* i added */
   padding: 1rem; /* i added */
@@ -521,20 +521,24 @@ textarea:focus {
 }
 
 .file-name {
-  font-weight: 500;
-  margin-right: 8px;
+  color: #2C3E50;
+  margin-right: 12px;
+  display: inline-block;
   vertical-align: middle;
+  max-width: 60%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .timestamp-box {
   display: inline-block;
-  padding: 4px 10px;
-  background-color: #e1e7ed;
-  border: 1px solid #c9d1d9;
-  border-radius: 4px;
-  font-family: monospace;
+  padding: 6px 12px;
+  background-color: #F5F7FA;
+  border: 1px solid #E0E6ED;
+  border-radius: 6px;
   font-size: 14px;
-  color: #333;
+  color: #7F8FA4;
   white-space: nowrap;
   vertical-align: middle;
 }
