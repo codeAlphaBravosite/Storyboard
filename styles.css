@@ -524,7 +524,7 @@ textarea:focus {
   /*display: flex;*/
   display: grid;
   grid-template-columns: 1fr auto; /* 1fr for filename, auto for timestamp */
-  gap: 1rem;
+  /*gap: 1rem;*/
   align-items: center;
   padding: 0.5rem;
   background-color: var(--background-color);
