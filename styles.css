@@ -502,7 +502,7 @@ textarea:focus {
 .section-content.files-list {
   white-space: normal; /*Makes the text wrap naturally */
   word-wrap: break-word; /* Prevents long words from breaking the layout */
-  text-align: left;
+  /*text-align: left;*/
   font-family: 'Inter', monospace;
   background-color: var(--background-color); /* i added */
   padding: 1rem; /* i added */
