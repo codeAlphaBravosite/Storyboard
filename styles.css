@@ -312,7 +312,7 @@ body {
 .files-list {
   display: flex;
   flex-direction: column;
-  gap: 0.7rem;
+  gap: 0.5rem;
 }
 
 .file-entry {
@@ -506,7 +506,6 @@ textarea:focus {
   font-family: 'Inter', monospace;
   background-color: var(--background-color); /* i added */
   padding: 1rem; /* i added */
-  margin: 0;
   border-radius: var(--radius); /* i added */
 }
 
@@ -566,7 +565,7 @@ textarea:focus {
   background-color: var(--border-color);
   border-radius: var(--radius);
   text-align: center;
-  padding: 0.15rem 0.3rem;
+  padding: 0.17rem 0.3rem;
 }
 
 @media (max-width: 768px) {
