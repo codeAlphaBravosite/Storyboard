@@ -505,7 +505,7 @@ textarea:focus {
   /*text-align: left;*/
   font-family: 'Inter', monospace;
   background-color: var(--background-color); /* i added */
-  padding: 0.5rem; /* i added */
+  padding: 1rem; /* i added */
   border-radius: var(--radius); /* i added */
 }
 
@@ -553,17 +553,18 @@ textarea:focus {
 
 .file-name {
   white-space: normal;
+  word-wrap: break-word;
   margin-right: 10px;
 }
 
 .timestamp-box {
   white-space: nowrap;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   color: var(--text-secondary);
   background-color: var(--border-color);
   border-radius: var(--radius);
   text-align: center;
-  padding: 0.2rem 0.4rem;
+  padding: 0.15rem 0.3rem;
 }
 
 @media (max-width: 768px) {
