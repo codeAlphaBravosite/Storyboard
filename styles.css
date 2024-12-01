@@ -231,6 +231,7 @@ body {
   padding: 0.75rem;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
+  overflow: visible;
 }
 
 .title-input {
@@ -241,6 +242,9 @@ body {
   background: transparent;
   width: 100%;
   color: var(--text-color);
+  white-space: normal; /* Allow text to wrap */
+  overflow-wrap: anywhere; /* Break long words if needed */
+  word-wrap: break-word; /* Legacy support */
 }
 
 .title-input:focus {
@@ -625,10 +629,11 @@ textarea:focus {
   .editor-title, .preview-title {
     flex-direction: column;
     align-items: stretch;
+    font-size: 1.125rem;
   }
 
   .title-input {
-    font-size: 1.25rem;
+    font-size: 1.125rem;
   }
 
   .btn {
