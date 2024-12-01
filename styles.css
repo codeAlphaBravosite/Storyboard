@@ -520,13 +520,45 @@ textarea:focus {
   border-radius: var(--radius);  /* i added */
 }
 
+.file-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.file-name {
+  font-family: 'Roboto', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: #2C3E50;
+  margin-right: 16px;
+  max-width: 70%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .timestamp-box {
+  display: inline-block;
+  padding: 6px 14px;
+  background-color: #F5F7FA;
+  border: 1px solid #E0E6ED;
+  border-radius: 6px;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 15px;
+  color: #7F8FA4;
+  white-space: nowrap;
+  text-align: center;
+  min-width: 100px;
+}
+
+/*.timestamp-box {
   color: var(--text-secondary);
   background-color: var(--border-color);
   border-radius: var(--radius);
   text-align: center;
 }
-
+*/
 @media (max-width: 768px) {
   .container {
     padding: 0 1rem;
