@@ -231,7 +231,6 @@ body {
   padding: 0.75rem;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
-  overflow: visible;
 }
 
 .title-input {
@@ -242,9 +241,6 @@ body {
   background: transparent;
   width: 100%;
   color: var(--text-color);
-  white-space: normal; /* Allow text to wrap */
-  overflow-wrap: anywhere; /* Break long words if needed */
-  word-wrap: break-word; /* Legacy support */
 }
 
 .title-input:focus {
