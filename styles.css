@@ -489,6 +489,26 @@ textarea:focus {
   line-height: 1.7;
 }
 
+.file-name {
+  font-family: Arial, sans-serif; /* Clean, modern font */
+  font-size: 0.95em; /* Slightly larger than the timestamp */
+  color: #333; /* Matches the timestamp color for consistency */
+  font-weight: 500; /* Makes the file name stand out slightly */
+  margin-right: 4px; /* Adds spacing between the name and timestamp */
+}
+.timestamp-box {
+  display: inline-block;
+  padding: 3px 8px;
+  background-color: #e1e7ed;
+  border: 1px solid #c9d1d9;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 0.9em;
+  color: #333;
+  white-space: nowrap;
+}
+
+
 .section-content.vo-script {
   white-space: normal; /* Makes the text wrap naturally */
   word-wrap: break-word; /* Prevents long words from breaking the layout */
