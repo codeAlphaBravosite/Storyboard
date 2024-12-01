@@ -241,9 +241,9 @@ body {
   font-size: 1.25rem;
   font-weight: 600;
   padding: 0.5rem;
-  border: none;
+  /*border: none;
   background: transparent;
-  width: 100%;
+  width: 100%;*/
   color: var(--text-color);
   line-height: 1.3;
 }
