@@ -520,23 +520,11 @@ textarea:focus {
   border-radius: var(--radius);  /* i added */
 }
 
-.file-name {
-  display: inline-block;
-  vertical-align: middle;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
 .timestamp-box {
-  display: inline-block;
-  background-color: #F5F7FA;
-  border: 1px solid #E0E6ED;
-  border-radius: 6px;
-  color: #7F8FA4;
-  white-space: nowrap;
-  vertical-align: middle;
-  text-align: center;
+  color: var(--text-secondary);
+  background-color: var(--border-color);
+  border-radius: var(--radius);
+  /*text-align: center;*/
 }
 
 @media (max-width: 768px) {
