@@ -66,6 +66,7 @@ body {
   font-weight: 600;
   color: var(--text-color);
   margin-bottom: 1rem;
+  line-height: 1.3;
 }
 
 .storyboard-card p {
