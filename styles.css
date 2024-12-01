@@ -492,7 +492,6 @@ textarea:focus {
 .section-content.vo-script {
   white-space: normal; /* Makes the text wrap naturally */
   word-wrap: break-word; /* Prevents long words from breaking the layout */
-  line-height: 1.5; /* Adds better spacing between lines */
   text-align: left;
   font-family: 'Inter', monospace;
   background-color: var(--background-color);
@@ -501,28 +500,24 @@ textarea:focus {
 }
 
 .section-content.files-list {
-  color: var(--text-secondary);
+  white-space: normal; /* Makes the text wrap naturally */
+  word-wrap: break-word; /* Prevents long words from breaking the layout */
+  text-align: left;
+  font-family: 'Inter', monospace;
   background-color: var(--background-color); /* i added */
   padding: 1rem; /* i added */
   border-radius: var(--radius); /* i added */
-  white-space: normal; /* Makes the text wrap naturally */
-  word-wrap: break-word; /* Prevents long words from breaking the layout */
-  line-height: 1.5; /* Adds better spacing between lines */
-  text-align: left;
-  font-family: 'Inter', monospace;
 }
 
 .section-content.notes {
   font-style: italic;
-  color: var(--text-secondary);
+  white-space: normal; /* Makes the text wrap naturally */
+  word-wrap: break-word; /* Prevents long words from breaking the layout */
+  text-align: left;
+  font-family: 'Inter', monospace;
   background-color: var(--background-color); /* i added */
   padding: 1rem; /* i added */
   border-radius: var(--radius);  /* i added */
-  white-space: normal; /* Makes the text wrap naturally */
-  word-wrap: break-word; /* Prevents long words from breaking the layout */
-  line-height: 1.5; /* Adds better spacing between lines */
-  text-align: left;
-  font-family: 'Inter', monospace;
 }
 
 @media (max-width: 768px) {
