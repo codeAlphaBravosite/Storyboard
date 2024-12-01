@@ -39,7 +39,7 @@ export class PreviewManager {
     
     const finalFiles = (scene.files || [])
       .filter(file => file && file.isFinal)
-      .map(file => `${sanitizeHTML(file.name || '')} (${sanitizeHTML(file.timestamp || '')})`)
+      .map(file => `<span class="file-name">${sanitizeHTML(file.name || '')}</span> (<span class="timestamp-box">${sanitizeHTML(file.timestamp || '')}</span>)`)
       .join('<br>');
 
     sceneElement.innerHTML = `
