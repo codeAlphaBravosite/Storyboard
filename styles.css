@@ -241,6 +241,9 @@ body {
   background: transparent;
   width: 100%;
   color: var(--text-color);
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
 }
 
 .title-input:focus {
@@ -625,12 +628,11 @@ textarea:focus {
   .editor-title, .preview-title {
     flex-direction: column;
     align-items: stretch;
-    font-size: 1.125rem;
   }
 
-  .title-input {
+ /* .title-input {
     font-size: 1.125rem;
-  }
+  }*/
 
   .btn {
     width: 100%;
