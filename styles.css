@@ -505,7 +505,8 @@ textarea:focus {
   /*text-align: left;*/
   font-family: 'Inter', monospace;
   background-color: var(--background-color); /* i added */
-  /*padding: 1rem;*/ /* i added */
+  padding: 1rem; /* i added */
+  margin: 0;
   border-radius: var(--radius); /* i added */
 }
 
