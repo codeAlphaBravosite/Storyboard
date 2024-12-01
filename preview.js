@@ -45,7 +45,7 @@ export class PreviewManager {
       <span class="timestamp-box">${sanitizeHTML(file.timestamp || '')}</span>
     </div> 
     `)
-      .join('<br>');
+      .join('');
 
     sceneElement.innerHTML = `
       <div class="scene-banner">
