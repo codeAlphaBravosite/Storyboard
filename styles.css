@@ -523,6 +523,15 @@ textarea:focus {
 .file-info {
   display: flex;
   align-items: center;
+  padding: 0.5rem;
+  background-color: var(--background-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  margin-bottom: 0.25rem;
+}
+
+.file-info:last-child {
+  margin-bottom: 0;
 }
 
 /*.file-name {
@@ -567,6 +576,7 @@ textarea:focus {
   border-radius: var(--radius);
   text-align: center;
   padding: 0.15rem 0.3rem;
+  justify-self: end;
 }
 
 @media (max-width: 768px) {
