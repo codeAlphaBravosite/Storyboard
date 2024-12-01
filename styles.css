@@ -500,7 +500,7 @@ textarea:focus {
 }
 
 .section-content.files-list {
-  white-space: normal; /*Makes the text wrap naturally */
+  /*white-space: normal;*/ /*Makes the text wrap naturally */
   word-wrap: break-word; /* Prevents long words from breaking the layout */
   /*text-align: left;*/
   font-family: 'Inter', monospace;
@@ -552,15 +552,17 @@ textarea:focus {
 }*/
 
 .file-name {
+  white-space: normal;
   margin-right: 10px;
 }
 
 .timestamp-box {
+  white-space: nowrap;
   color: var(--text-secondary);
   background-color: var(--border-color);
   border-radius: var(--radius);
   text-align: center;
-  padding: 5px;
+  padding: 0.25rem 0.5rem;
 }
 
 @media (max-width: 768px) {
