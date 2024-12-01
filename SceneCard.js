@@ -4,7 +4,7 @@ export function renderScene(scene) {
   const sceneElement = document.createElement('div');
   sceneElement.className = 'scene-card';
   sceneElement.dataset.id = scene.id;
-  sceneElement.draggable = true;
+ // sceneElement.draggable = true;
 
   sceneElement.innerHTML = `
     <div class="scene-header">
