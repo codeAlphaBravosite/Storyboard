@@ -500,9 +500,9 @@ textarea:focus {
 }
 
 .section-content.files-list {
-  /*white-space: normal;*/ /* Makes the text wrap naturally */
-  /*word-wrap: break-word;*/ /* Prevents long words from breaking the layout */
- /* text-align: left;*/
+  white-space: normal; /*Makes the text wrap naturally */
+  word-wrap: break-word; /* Prevents long words from breaking the layout */
+  text-align: left;
   font-family: 'Inter', monospace;
   background-color: var(--background-color); /* i added */
   padding: 1rem; /* i added */
@@ -521,18 +521,27 @@ textarea:focus {
 }
 
 .file-name {
-  font-weight: 500;
+  color: #2C3E50;
+  margin-right: 12px;
+  display: inline-block;
+  vertical-align: middle;
+  max-width: 60%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .timestamp-box {
-  display: inline-flex;
-  align-items: center;
-  padding: 4px 8px;
-  background-color: #f0f2f5; /* Slightly lighter background color */
-  border: 1px solid #d0d7de; /* Lighter border color */
-  border-radius: 4px;
-  color: #333;
+  display: inline-block;
+  padding: 6px 12px;
+  background-color: #F5F7FA;
+  border: 1px solid #E0E6ED;
+  border-radius: 6px;
+  color: #7F8FA4;
   white-space: nowrap;
+  vertical-align: middle;
+  text-align: center;
+  width: 120px;
 }
 
 @media (max-width: 768px) {
@@ -552,9 +561,6 @@ textarea:focus {
   .logo {
   font-size: 1.3rem;
   }
-
-  .timestamp-box {
-    padding: 3px 6px;
 
   .nav-content {
     flex-direction: column;
