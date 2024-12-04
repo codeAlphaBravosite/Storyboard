@@ -592,7 +592,9 @@ textarea:focus {
 }
 
 .container2 {
-    width: 100%;
+    width: auto;
+    background: none;
+    border: none;
     margin-bottom: 0.5rem;
 }
 
@@ -625,10 +627,10 @@ textarea:focus {
 
 .toggle-content h4 {
     font-size: 1rem;
-    font-weight: 450;
+    font-weight: 400;
     background-color: var(--primary-color);
     color: white;
-    padding: 0.25rem 0.5rem;
+    padding: 0.3rem 0.6rem;
     border-radius: var(--radius);
     margin: 0;
 }
