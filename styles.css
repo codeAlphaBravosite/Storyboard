@@ -631,7 +631,7 @@ textarea:focus {
 .triangle-icon {
     width: 20px;
     height: 20px;
-    fill: #4a90e2;
+    fill: var(--text-color);
     transition: transform 0.3s ease;
     flex-shrink: 0;
 }
