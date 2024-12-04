@@ -630,7 +630,7 @@ textarea:focus {
 }
 
 .section-toggle[aria-expanded="false"] .triangle-icon {
-    transform: rotate(120deg);
+    transform: rotate(180deg);
 }
 
 #converterContent {
