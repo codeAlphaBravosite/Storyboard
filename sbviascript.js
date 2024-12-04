@@ -14,6 +14,14 @@ const toast = new ToastManager();
 const previewManager = new PreviewManager();
 const sceneManager = new SceneManager();
 
+// Add event listener for preview button in editor
+document.getElementById('previewFromEditor')?.addEventListener('click', () => {
+    if (sceneManager.currentStoryboard) {
+        previewManager.renderPreview(sceneManager.currentStoryboard);
+        showPage('previewPage');
+    }
+});
+
 // Toggle visibility when button is clicked
 toggleSwitch.addEventListener('click', () => {
     toggleConverter();
@@ -133,6 +141,15 @@ convertButton.addEventListener('click', async () => {
             editBtn.onclick = () => {
                 sceneManager.loadStoryboard(storyboard);
                 showPage('editorPage');
+                
+                // Ensure the preview button in editor works with this storyboard
+                const previewFromEditorBtn = document.getElementById('previewFromEditor');
+                if (previewFromEditorBtn) {
+                    previewFromEditorBtn.onclick = () => {
+                        previewManager.renderPreview(storyboard);
+                        showPage('previewPage');
+                    };
+                }
             };
         }
         
