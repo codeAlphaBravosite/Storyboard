@@ -39,6 +39,47 @@ function toggleConverter(forceClose = false) {
     }
 }
 
+const STORAGE_KEY = 'storyboards';
+
+function createStoryboard(title) {
+    return {
+        id: Date.now().toString(),
+        title: title,
+        scenes: [],
+        lastEdited: new Date().toISOString()
+    };
+}
+
+function createScene(number) {
+    return {
+        id: Date.now().toString() + '-' + number,
+        number: number,
+        voScript: '',
+        files: [],
+        notes: ''
+    };
+}
+
+function getStoryboards() {
+    try {
+        const data = localStorage.getItem(STORAGE_KEY);
+        return data ? JSON.parse(data) : [];
+    } catch (error) {
+        console.error('Error reading from storage:', error);
+        return [];
+    }
+}
+
+function saveStoryboards(storyboards) {
+    try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(storyboards));
+        return true;
+    } catch (error) {
+        console.error('Error saving to storage:', error);
+        return false;
+    }
+}
+
 function breakIntoScenes(text) {
     if (!text || typeof text !== 'string') {
         throw new Error('Invalid input: text must be a non-empty string');
@@ -46,58 +87,62 @@ function breakIntoScenes(text) {
     const sceneTexts = text.split('।')
         .map(s => s.trim())
         .filter(s => s);
-
+    
     if (sceneTexts.length === 0) {
         throw new Error('No valid scenes found in the input text');
     }
 
-    const storyboard = createStoryboard('Untitled');
+    // Create storyboard in the same format as storage.js
+    const storyboard = createStoryboard('Imported Script');
     storyboard.scenes = sceneTexts.map((text, index) => {
         const scene = createScene(index + 1);
         scene.voScript = text;
         return scene;
     });
 
-    const storyboards = storage.getStoryboards();
+    // Get existing storyboards and add new one at the beginning
+    const storyboards = getStoryboards();
     storyboards.unshift(storyboard);
-    storage.saveStoryboards(storyboards);
-
-    // Synchronize storyboard across managers
-    sceneManager.currentStoryboard = storyboard;
-    previewManager.currentStoryboard = storyboard;
-
+    saveStoryboards(storyboards);
+    
     return storyboard;
 }
 
 convertButton.addEventListener('click', async () => {
     const text = scriptInput.value.trim();
-
+    
     if (!text) {
         toast.error('Please enter your script before converting.');
         return;
     }
-
+    
     convertButton.disabled = true;
-
+    
     try {
         const storyboard = breakIntoScenes(text);
-
-        toast.success('Successfully created via Script!');
+        
+        // Show success message
+        toast.success('Script converted successfully!');
+        
+        // Clear the input
         scriptInput.value = '';
-
+        
+        // Close the toggle
         toggleConverter(true);
-
-        // Render Preview
+        
+        // Show preview of the created storyboard
         previewManager.renderPreview(storyboard);
-
-        // Add event listeners for Preview Page buttons
+        
+        // Add event listeners for preview page buttons
         const editBtn = document.getElementById('backToEditBtn');
         const exportBtn = document.getElementById('exportBtn');
-
+        
         if (editBtn) {
             editBtn.onclick = () => {
                 sceneManager.loadStoryboard(storyboard);
                 showPage('editorPage');
+                
+                // Ensure the preview button in editor works with this storyboard
                 const previewFromEditorBtn = document.getElementById('previewFromEditor');
                 if (previewFromEditorBtn) {
                     previewFromEditorBtn.onclick = () => {
@@ -107,9 +152,8 @@ convertButton.addEventListener('click', async () => {
                 }
             };
         }
-
+        
         if (exportBtn) {
-            exportBtn.onclick = null;
             exportBtn.onclick = () => {
                 const success = storage.exportToCsv(storyboard);
                 if (!success) {
@@ -117,8 +161,9 @@ convertButton.addEventListener('click', async () => {
                 }
             };
         }
-
+        
         showPage('previewPage');
+        
     } catch (error) {
         console.error('Conversion error:', error);
         toast.error(`Conversion failed: ${error.message}`);
