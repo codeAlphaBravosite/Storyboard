@@ -591,13 +591,6 @@ textarea:focus {
   justify-self: end;
 }
 
-.container2 {
-  width: 100%;
-  background: none;
-  border: none;
-  margin-bottom: 1.2rem;
-}
-
 .section-toggle {
     width: 100%;
     background: none;
@@ -637,7 +630,7 @@ textarea:focus {
 }
 
 .section-toggle[aria-expanded="false"] .triangle-icon {
-    transform: rotate(180deg);
+    transform: rotate(120deg);
 }
 
 #converterContent {
