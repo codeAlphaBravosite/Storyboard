@@ -2,7 +2,6 @@ const toggleSwitch = document.getElementById('toggleSwitch');
 const converterContent = document.getElementById('converterContent');
 const scriptInput = document.getElementById('scriptInput');
 const convertButton = document.getElementById('convertButton');
-const statusElement = document.getElementById('status');
 
 // Import required managers from existing modules
 import { PreviewManager } from './preview.js';
@@ -86,7 +85,7 @@ function breakIntoScenes(text) {
     }
 
     // Create storyboard in the same format as storage.js
-    const storyboard = createStoryboard('Untitled');
+    const storyboard = createStoryboard('Imported Script');
     storyboard.scenes = sceneTexts.map((text, index) => {
         const scene = createScene(index + 1);
         scene.voScript = text;
@@ -101,29 +100,21 @@ function breakIntoScenes(text) {
     return storyboard;
 }
 
-function updateStatus(message, isError = false) {
-    statusElement.textContent = message;
-    statusElement.className = isError ? 'error' : 'success';
-}
-
 convertButton.addEventListener('click', async () => {
     const text = scriptInput.value.trim();
     
     if (!text) {
-        updateStatus('Please enter your script before converting.', true);
         toast.error('Please enter your script before converting.');
         return;
     }
     
     convertButton.disabled = true;
-    updateStatus('Converting your script...');
     
     try {
         const storyboard = breakIntoScenes(text);
         
         // Show success message
-        updateStatus('Script converted successfully!');
-        toast.success('Successfully created via Script!');
+        toast.success('Script converted successfully!');
         
         // Clear the input
         scriptInput.value = '';
@@ -158,14 +149,8 @@ convertButton.addEventListener('click', async () => {
         
     } catch (error) {
         console.error('Conversion error:', error);
-        updateStatus(`❌ Error: ${error.message}`, true);
         toast.error(`Conversion failed: ${error.message}`);
     } finally {
         convertButton.disabled = false;
     }
-});
-
-scriptInput.addEventListener('input', () => {
-    statusElement.textContent = '';
-    statusElement.className = '';
 });
