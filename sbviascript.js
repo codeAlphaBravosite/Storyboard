@@ -1,18 +1,11 @@
 const toggleSwitch = document.getElementById('toggleSwitch');
 const converterContent = document.getElementById('converterContent');
 
-// Initialize the state based on the toggle's default state
-if (!toggleSwitch.checked) {
-    converterContent.classList.add('hidden');
-}
-
-// Toggle visibility when switch is clicked
-toggleSwitch.addEventListener('change', () => {
-    if (toggleSwitch.checked) {
-        converterContent.classList.remove('hidden');
-    } else {
-        converterContent.classList.add('hidden');
-    }
+// Toggle visibility when button is clicked
+toggleSwitch.addEventListener('click', () => {
+    const isExpanded = toggleSwitch.getAttribute('aria-expanded') === 'true';
+    toggleSwitch.setAttribute('aria-expanded', !isExpanded);
+    converterContent.classList.toggle('hidden');
 });
 
 const STORAGE_KEY = 'storyboards';
