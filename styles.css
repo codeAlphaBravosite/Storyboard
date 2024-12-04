@@ -593,17 +593,15 @@ textarea:focus {
 
 .container2 {
     width: 100%;
-    background: none;
-    border: none;
 }
 
 .section-toggle {
     width: 100%;
-    background: none;
-    border: none;
+   /* background: none;*/
+   /* border: none;*/
     cursor: pointer;
     padding: 12px;
-    margin-bottom: 1.2rem;
+    /*margin-bottom: 1.2rem;*/
     transition: background-color 0.2s ease;
 }
 
@@ -613,9 +611,9 @@ textarea:focus {
 
 .toggle-content {
     display: flex;
-    /*align-items: center;
+    align-items: center;
     justify-content: space-between;
-    gap: 8px;*/
+    /*gap: 8px;*/
 }
 
 .toggle-content h3 {
@@ -623,7 +621,6 @@ textarea:focus {
     font-weight: 600;
     color: var(--text-color);
     margin: 0;
-    padding-left: 2px;
 }
 
 .triangle-icon {
@@ -643,7 +640,7 @@ textarea:focus {
     width: 100%;
     max-height: 1000px;
     overflow: hidden;
-    margin-bottom: 1.3rem;
+    margin-bottom: 1rem;
 }
 
 #converterContent.hidden {
@@ -678,6 +675,12 @@ textarea:focus {
   background-color: var(--card-background);
   font-size: 0.9375rem;
   line-height: 1.6;
+}
+
+#scriptInput:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
 #convertButton {
