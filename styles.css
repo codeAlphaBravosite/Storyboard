@@ -597,7 +597,7 @@ textarea:focus {
     border: none;
     cursor: pointer;
     padding: 12px;
-    margin-bottom: 1rem;
+    margin-bottom: 1.2rem;
     transition: background-color 0.2s ease;
 }
 
@@ -607,9 +607,9 @@ textarea:focus {
 
 .toggle-content {
     display: flex;
-    align-items: center;
+    /*align-items: center;
     justify-content: space-between;
-    gap: 8px;
+    gap: 8px;*/
 }
 
 .toggle-content h3 {
@@ -618,6 +618,7 @@ textarea:focus {
     color: var(--text-color);
     margin: 0;
     text-align: left;
+    padding-left: 2px;
 }
 
 .triangle-icon {
