@@ -628,8 +628,8 @@ textarea:focus {
 }
 
 .triangle-icon {
-    width: 20px;
-    height: 20px;
+    width: 17px;
+    height: 17px;
     fill: var(--text-color);
     transition: transform 0.3s ease;
     flex-shrink: 0;
@@ -653,6 +653,7 @@ textarea:focus {
     padding: 0;
 }
 
+/*
 #scriptInput {
     width: 100%;
     height: 250px;
@@ -662,24 +663,41 @@ textarea:focus {
     font-size: 1rem;
     resize: vertical;
     margin-bottom: 1rem;
-    /*transition: border-color 0.2s ease;*/
+    transition: border-color 0.2s ease;
     background-color: var(--background-color);
+} */
+
+#scriptInput {
+  width: 100%;
+  min-height: 120px;
+  padding: 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  resize: vertical;
+  font-family: inherit;
+  background-color: var(--card-background);
+  font-size: 0.9375rem;
+  line-height: 1.6;
 }
 
 #convertButton {
-    width: 100%;
-    background-color: #4a90e2;
-    color: white;
-    border: none;
-    padding: 12px;
-    border-radius: 6px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: all 0.2s ease;
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius);
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.875rem;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 }
 
 #convertButton:hover {
-    background-color: #357abd;
+    background-color: var(--primary-hover);
 }
 
 
