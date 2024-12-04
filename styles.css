@@ -593,15 +593,16 @@ textarea:focus {
 
 .container2 {
     width: 100%;
+    margin-bottom: 1.2rem;
 }
 
 .section-toggle {
     width: 100%;
-   /* background: none;*/
-   /* border: none;*/
+    background: none;
+    border: none;
     cursor: pointer;
     padding: 12px;
-    /*margin-bottom: 1.2rem;*/
+    margin-bottom: 1.2rem;
     transition: background-color 0.2s ease;
 }
 
@@ -611,9 +612,9 @@ textarea:focus {
 
 .toggle-content {
     display: flex;
-    align-items: center;
+    /*align-items: center;
     justify-content: space-between;
-    /*gap: 8px;*/
+    gap: 8px;*/
 }
 
 .toggle-content h3 {
