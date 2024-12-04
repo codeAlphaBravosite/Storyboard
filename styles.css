@@ -596,16 +596,15 @@ textarea:focus {
     background: none;
     border: none;
     cursor: pointer;
-    padding-right: 1px;
+    padding: 12px;
     margin-bottom: 1rem;
-    /*transition: background-color 0.2s ease;*/
+    transition: background-color 0.2s ease;
 }
 
-/*
 .section-toggle:hover {
     background-color: rgba(74, 144, 226, 0.1);
 }
-*/
+
 .toggle-content {
     display: flex;
     align-items: center;
@@ -613,16 +612,14 @@ textarea:focus {
     gap: 8px;
 }
 
-/*
-
 .toggle-content h3 {
-    font-size: 1.75rem;
+    font-size: 1.2rem;
     font-weight: 600;
-    color: #1a1a1a;
+    color: var(--text-color);
     margin: 0;
     text-align: left;
 }
-*/
+
 .triangle-icon {
     width: 20px;
     height: 20px;
@@ -632,7 +629,7 @@ textarea:focus {
 }
 
 .section-toggle[aria-expanded="false"] .triangle-icon {
-    transform: rotate(270deg);
+    transform: rotate(180deg);
 }
 
 #converterContent {
