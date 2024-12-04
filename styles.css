@@ -593,8 +593,6 @@ textarea:focus {
 
 .container2 {
     width: auto;
-    background: none;
-    border: none;
     margin-bottom: 0.5rem;
 }
 
@@ -617,9 +615,6 @@ textarea:focus {
 
 .toggle-content {
     display: flex;
-    width: auto;
-    background: none;
-    border: none;
     align-items: center;
     justify-content: space-between;
     gap: 8px;
@@ -627,10 +622,10 @@ textarea:focus {
 
 .toggle-content h4 {
     font-size: 1rem;
-    font-weight: 400;
+    font-weight: 420;
     background-color: var(--primary-color);
     color: white;
-    padding: 0.3rem 0.6rem;
+    padding: 0.35rem 0.7rem;
     border-radius: var(--radius);
     margin: 0;
 }
@@ -639,7 +634,7 @@ textarea:focus {
     width: 15px;
     height: 15px;
     fill: var(--text-color);
-    transition: transform 0.3s ease;
+    /*transition: transform 0.3s ease;*/
     flex-shrink: 0;
 }
 
