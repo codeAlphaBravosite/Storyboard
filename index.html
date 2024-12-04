@@ -30,22 +30,23 @@
     <main class="container">
         <div id="homePage" class="page active">
             <!-- Toggle -->
-            <div>
-    <div>
-        <h3>Create via Script</h3>
-        <button class="triangle-toggle" id="toggleSwitch" aria-expanded="false">
-            <svg viewBox="0 0 24 24" class="triangle-icon" aria-hidden="true">
+
+            <div class="container">
+    <button class="section-toggle" id="toggleSwitch" aria-expanded="false">
+        <div class="toggle-content">
+            <h3>Script to Storyboard</h3>
+            <svg viewBox="0 0 20 20" class="triangle-icon" aria-hidden="true">
                 <path d="M12 4L4 20H20L12 4Z" />
             </svg>
-        </button>
-    </div>
+        </div>
+    </button>
     
     <div id="converterContent" class="hidden">
         <textarea id="scriptInput" placeholder="Paste your script here..."></textarea>
-        <button id="convertButton">Create</button>
-       <!-- <div id="status" role="status" aria-live="polite"></div> -->
+        <button id="convertButton">Convert Now</button>
+        <div id="status" role="status" aria-live="polite"></div>
     </div>
-</div>
+            </div>
             
             <div class="recent-storyboards">
                 <h3>↻ Recent Storyboards</h3>
