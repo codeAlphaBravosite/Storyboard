@@ -593,7 +593,7 @@ textarea:focus {
 
 .container2 {
     width: 100%;
-    margin-bottom: 1.2rem;
+    margin-bottom: 0.5rem;
 }
 
 .section-toggle {
@@ -612,15 +612,18 @@ textarea:focus {
 
 .toggle-content {
     display: flex;
-    /*align-items: center;
+    align-items: center;
     justify-content: space-between;
-    gap: 8px;*/
+    gap: 8px;
 }
 
 .toggle-content h3 {
     font-size: 1.2rem;
     font-weight: 600;
-    color: var(--text-color);
+    color: var(--text-secondary);
+    background-color: var(--border-color);
+    padding: 0.25rem 0.5rem;
+    border-radius: var(--radius);
     margin: 0;
 }
 
