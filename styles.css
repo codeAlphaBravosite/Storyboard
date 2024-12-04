@@ -595,7 +595,6 @@ textarea:focus {
     width: 100%;
     background: none;
     border: none;
-  margin-bottom: 1.2rem;
 }
 
 .section-toggle {
@@ -639,12 +638,12 @@ textarea:focus {
     transform: rotate(180deg);
 }
 
-/*
 #converterContent {
     transition: all 0.3s ease;
     width: 100%;
     max-height: 1000px;
     overflow: hidden;
+    margin-bottom: 1.2rem;
 }
 
 #converterContent.hidden {
@@ -653,7 +652,6 @@ textarea:focus {
     margin: 0;
     padding: 0;
 }
-*/
 
 /*
 #scriptInput {
@@ -700,7 +698,6 @@ textarea:focus {
 }
 
 #convertButton:hover {
-    color: var(--text-color);
     background-color: var(--primary-hover);
 }
 
