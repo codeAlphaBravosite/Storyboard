@@ -591,34 +591,51 @@ textarea:focus {
   justify-self: end;
 }
 
-.triangle-toggle {
+.section-toggle {
+    width: 100%;
     background: none;
     border: none;
     cursor: pointer;
-    padding: 8px;
-    transition: transform 0.3s ease;
-    flex-shrink: 0; /* Prevents the button from shrinking */
+    padding: 12px;
+    margin-bottom: 1rem;
+    transition: background-color 0.2s ease;
 }
 
-.triangle-toggle[aria-expanded="false"] {
-    transform: rotate(180deg);
+.section-toggle:hover {
+    background-color: rgba(74, 144, 226, 0.1);
+}
+
+.toggle-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.toggle-content h3 {
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin: 0;
+    text-align: left;
 }
 
 .triangle-icon {
     width: 24px;
     height: 24px;
     fill: #4a90e2;
-    transition: fill 0.2s ease;
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
 }
 
-.triangle-toggle:hover .triangle-icon {
-    fill: #357abd;
+.section-toggle[aria-expanded="false"] .triangle-icon {
+    transform: rotate(180deg);
 }
 
 #converterContent {
     transition: all 0.3s ease;
     width: 100%;
-    max-height: 1000px; /* Adjust based on your needs */
+    max-height: 1000px;
     overflow: hidden;
 }
 
@@ -657,6 +674,7 @@ textarea:focus {
 #convertButton:hover {
     background-color: #357abd;
 }
+
 
 @media (max-width: 768px) {
   .container {
@@ -709,6 +727,10 @@ textarea:focus {
     font-size: 1.125rem;
   }*/
 
+.toggle-content h2 {
+        font-size: 1.5rem;
+    }
+    
     #converterContent {
         padding: 0 8px;
     }
@@ -716,6 +738,7 @@ textarea:focus {
     #scriptInput {
         height: 250px;
         font-size: 0.95rem;
+    }
 
   .btn {
     width: 100%;
