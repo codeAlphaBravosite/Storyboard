@@ -14,11 +14,16 @@ const toast = new ToastManager();
 const previewManager = new PreviewManager();
 const sceneManager = new SceneManager();
 
+const STORAGE_KEY = 'storyboards';
+
 // Add event listener for preview button in editor
 document.getElementById('previewFromEditor')?.addEventListener('click', () => {
     if (sceneManager.currentStoryboard) {
         previewManager.renderPreview(sceneManager.currentStoryboard);
         showPage('previewPage');
+        
+        // Ensure export button is set up correctly
+        setupExportButton(sceneManager.currentStoryboard);
     }
 });
 
@@ -38,8 +43,6 @@ function toggleConverter(forceClose = false) {
         converterContent.classList.toggle('hidden');
     }
 }
-
-const STORAGE_KEY = 'storyboards';
 
 function createStoryboard(title) {
     return {
@@ -93,7 +96,7 @@ function breakIntoScenes(text) {
     }
 
     // Create storyboard in the same format as storage.js
-    const storyboard = createStoryboard('Imported Script');
+    const storyboard = createStoryboard('Untitled');
     storyboard.scenes = sceneTexts.map((text, index) => {
         const scene = createScene(index + 1);
         scene.voScript = text;
@@ -108,6 +111,29 @@ function breakIntoScenes(text) {
     return storyboard;
 }
 
+// Function to set up export button
+function setupExportButton(storyboard) {
+    const exportBtn = document.getElementById('exportBtn');
+    if (exportBtn) {
+        // Remove any existing event listeners to prevent multiple bindings
+        const newExportBtn = exportBtn.cloneNode(true);
+        exportBtn.parentNode.replaceChild(newExportBtn, exportBtn);
+
+        newExportBtn.onclick = () => {
+            if (storyboard) {
+                const success = storage.exportToCsv(storyboard);
+                if (!success) {
+                    toast.error('Error exporting storyboard. Please check the console for details.');
+                }
+            } else {
+                toast.error('No storyboard available to export.');
+            }
+        };
+    }
+}
+
+let currentStoryboard = null;
+
 convertButton.addEventListener('click', async () => {
     const text = scriptInput.value.trim();
     
@@ -119,7 +145,8 @@ convertButton.addEventListener('click', async () => {
     convertButton.disabled = true;
     
     try {
-        const storyboard = breakIntoScenes(text);
+        // Create and store the storyboard
+        currentStoryboard = breakIntoScenes(text);
         
         // Show success message
         toast.success('Script converted successfully!');
@@ -131,36 +158,36 @@ convertButton.addEventListener('click', async () => {
         toggleConverter(true);
         
         // Show preview of the created storyboard
-        previewManager.renderPreview(storyboard);
+        previewManager.renderPreview(currentStoryboard);
         
-        // Add event listeners for preview page buttons
+        // Set up preview page buttons
         const editBtn = document.getElementById('backToEditBtn');
-        const exportBtn = document.getElementById('exportBtn');
         
         if (editBtn) {
-            editBtn.onclick = () => {
-                sceneManager.loadStoryboard(storyboard);
+            // Remove any existing event listeners
+            const newEditBtn = editBtn.cloneNode(true);
+            editBtn.parentNode.replaceChild(newEditBtn, editBtn);
+
+            newEditBtn.onclick = () => {
+                sceneManager.loadStoryboard(currentStoryboard);
                 showPage('editorPage');
                 
                 // Ensure the preview button in editor works with this storyboard
                 const previewFromEditorBtn = document.getElementById('previewFromEditor');
                 if (previewFromEditorBtn) {
                     previewFromEditorBtn.onclick = () => {
-                        previewManager.renderPreview(storyboard);
+                        previewManager.renderPreview(currentStoryboard);
                         showPage('previewPage');
+                        
+                        // Re-setup export button when returning to preview
+                        setupExportButton(currentStoryboard);
                     };
                 }
             };
         }
         
-        if (exportBtn) {
-            exportBtn.onclick = () => {
-                const success = storage.exportToCsv(storyboard);
-                if (!success) {
-                    toast.error('Error exporting storyboard. Please check the console for details.');
-                }
-            };
-        }
+        // Setup export button for the preview page
+        setupExportButton(currentStoryboard);
         
         showPage('previewPage');
         
