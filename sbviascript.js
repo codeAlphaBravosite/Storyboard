@@ -82,7 +82,7 @@ convertButton.addEventListener('click', async () => {
     try {
         const storyboard = breakIntoScenes(text);
 
-        toast.success('Script converted successfully!');
+        toast.success('Successfully created via Script!');
         scriptInput.value = '';
 
         toggleConverter(true);
