@@ -8,16 +8,29 @@ const statusElement = document.getElementById('status');
 import { PreviewManager } from './preview.js';
 import { ToastManager } from './toast.js';
 import { showPage } from './utils.js';
+import { SceneManager } from './scenes.js';
+import { storage } from './storage.js';
 
 const toast = new ToastManager();
 const previewManager = new PreviewManager();
+const sceneManager = new SceneManager();
 
 // Toggle visibility when button is clicked
 toggleSwitch.addEventListener('click', () => {
-    const isExpanded = toggleSwitch.getAttribute('aria-expanded') === 'true';
-    toggleSwitch.setAttribute('aria-expanded', !isExpanded);
-    converterContent.classList.toggle('hidden');
+    toggleConverter();
 });
+
+// Function to handle toggle state
+function toggleConverter(forceClose = false) {
+    const isExpanded = toggleSwitch.getAttribute('aria-expanded') === 'true';
+    if (forceClose) {
+        toggleSwitch.setAttribute('aria-expanded', 'false');
+        converterContent.classList.add('hidden');
+    } else {
+        toggleSwitch.setAttribute('aria-expanded', !isExpanded);
+        converterContent.classList.toggle('hidden');
+    }
+}
 
 const STORAGE_KEY = 'storyboards';
 
@@ -85,7 +98,7 @@ function breakIntoScenes(text) {
     storyboards.unshift(storyboard);
     saveStoryboards(storyboards);
     
-    return storyboard; // Return the storyboard object instead of just scenes
+    return storyboard;
 }
 
 function updateStatus(message, isError = false) {
@@ -115,8 +128,32 @@ convertButton.addEventListener('click', async () => {
         // Clear the input
         scriptInput.value = '';
         
+        // Close the toggle
+        toggleConverter(true);
+        
         // Show preview of the created storyboard
         previewManager.renderPreview(storyboard);
+        
+        // Add event listeners for preview page buttons
+        const editBtn = document.getElementById('backToEditBtn');
+        const exportBtn = document.getElementById('exportBtn');
+        
+        if (editBtn) {
+            editBtn.onclick = () => {
+                sceneManager.loadStoryboard(storyboard);
+                showPage('editorPage');
+            };
+        }
+        
+        if (exportBtn) {
+            exportBtn.onclick = () => {
+                const success = storage.exportToCsv(storyboard);
+                if (!success) {
+                    toast.error('Error exporting storyboard. Please check the console for details.');
+                }
+            };
+        }
+        
         showPage('previewPage');
         
     } catch (error) {
