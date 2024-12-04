@@ -1,5 +1,16 @@
 const toggleSwitch = document.getElementById('toggleSwitch');
 const converterContent = document.getElementById('converterContent');
+const scriptInput = document.getElementById('scriptInput');
+const convertButton = document.getElementById('convertButton');
+const statusElement = document.getElementById('status');
+
+// Import required managers from existing modules
+import { PreviewManager } from './preview.js';
+import { ToastManager } from './toast.js';
+import { showPage } from './utils.js';
+
+const toast = new ToastManager();
+const previewManager = new PreviewManager();
 
 // Toggle visibility when button is clicked
 toggleSwitch.addEventListener('click', () => {
@@ -9,9 +20,6 @@ toggleSwitch.addEventListener('click', () => {
 });
 
 const STORAGE_KEY = 'storyboards';
-const scriptInput = document.getElementById('scriptInput');
-const convertButton = document.getElementById('convertButton');
-const statusElement = document.getElementById('status');
 
 function createStoryboard(title) {
     return {
@@ -77,47 +85,8 @@ function breakIntoScenes(text) {
     storyboards.unshift(storyboard);
     saveStoryboards(storyboards);
     
-    return sceneTexts;
+    return storyboard; // Return the storyboard object instead of just scenes
 }
-
-/* CSV Download functionality - commented out but preserved for future use
-function arrayToCSV(scenes) {
-    const BOM = '\uFEFF';
-    const header = ['Scene Number', 'VO/Script', 'Files', 'Notes'];
-    
-    const rows = scenes.map((scene, index) => {
-        return [index + 1, scene, '', ''];
-    });
-    const csvArray = [header, ...rows];
-    
-    return BOM + csvArray.map(row => {
-        return row.map(field => {
-            const stringField = String(field);
-            if (stringField.includes(',') || stringField.includes('"') || 
-                stringField.includes('\n') || stringField.includes('।')) {
-                return `"${stringField.replace(/"/g, '""')}"`;
-            }
-            return stringField;
-        }).join(',');
-    }).join('\n');
-}
-
-function downloadCSV(csvString, filename = 'script_breakdown.csv') {
-    const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8' });
-    const url = URL.createObjectURL(blob);
-    
-    try {
-        const link = document.createElement('a');
-        link.setAttribute('href', url);
-        link.setAttribute('download', filename);
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    } finally {
-        URL.revokeObjectURL(url);
-    }
-}
-*/
 
 function updateStatus(message, isError = false) {
     statusElement.textContent = message;
@@ -129,18 +98,31 @@ convertButton.addEventListener('click', async () => {
     
     if (!text) {
         updateStatus('Please enter your script before converting.', true);
+        toast.error('Please enter your script before converting.');
         return;
     }
+    
     convertButton.disabled = true;
     updateStatus('Converting your script...');
+    
     try {
-        const scenes = breakIntoScenes(text);
-        // const csvString = arrayToCSV(scenes);
-        // downloadCSV(csvString);
-        updateStatus('Converted and Scenes created successfully!');
+        const storyboard = breakIntoScenes(text);
+        
+        // Show success message
+        updateStatus('Script converted successfully!');
+        toast.success('Script converted successfully!');
+        
+        // Clear the input
+        scriptInput.value = '';
+        
+        // Show preview of the created storyboard
+        previewManager.renderPreview(storyboard);
+        showPage('previewPage');
+        
     } catch (error) {
         console.error('Conversion error:', error);
         updateStatus(`❌ Error: ${error.message}`, true);
+        toast.error(`Conversion failed: ${error.message}`);
     } finally {
         convertButton.disabled = false;
     }
