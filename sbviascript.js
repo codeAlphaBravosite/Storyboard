@@ -1,11 +1,9 @@
-// Select DOM elements with null checks
 const toggleSwitch = document.getElementById('toggleSwitch');
 const converterContent = document.getElementById('converterContent');
 const scriptInput = document.getElementById('scriptInput');
 const convertButton = document.getElementById('convertButton');
-const previewFromEditorBtn = document.getElementById('previewFromEditor');
 
-// Import required managers
+// Import required managers from existing modules
 import { PreviewManager } from './preview.js';
 import { ToastManager } from './toast.js';
 import { showPage } from './utils.js';
@@ -16,57 +14,49 @@ const toast = new ToastManager();
 const previewManager = new PreviewManager();
 const sceneManager = new SceneManager();
 
-const STORAGE_KEY = 'storyboards';
-
-// Add event listener for preview button
-if (previewFromEditorBtn) {
-    previewFromEditorBtn.addEventListener('click', () => {
-        if (sceneManager.currentStoryboard) {
-            previewManager.renderPreview(sceneManager.currentStoryboard);
-            showPage('previewPage');
-        } else {
-            toast.error('No storyboard available to preview.');
-        }
-    });
-}
-
-// Function to handle toggle state
-function toggleConverter(forceClose = false) {
-    if (!toggleSwitch || !converterContent) return;
-
-    const isExpanded = toggleSwitch.getAttribute('aria-expanded') === 'true';
-
-    if (forceClose || isExpanded) {
-        toggleSwitch.setAttribute('aria-expanded', 'false');
-        converterContent.classList.add('hidden');
-    } else {
-        toggleSwitch.setAttribute('aria-expanded', 'true');
-        converterContent.classList.remove('hidden');
+// Add event listener for preview button in editor
+document.getElementById('previewFromEditor')?.addEventListener('click', () => {
+    if (sceneManager.currentStoryboard) {
+        previewManager.renderPreview(sceneManager.currentStoryboard);
+        showPage('previewPage');
     }
-}
+});
 
-// Event listener for toggle button
-toggleSwitch?.addEventListener('click', () => {
+// Toggle visibility when button is clicked
+toggleSwitch.addEventListener('click', () => {
     toggleConverter();
 });
 
-// Helper functions
+// Function to handle toggle state
+function toggleConverter(forceClose = false) {
+    const isExpanded = toggleSwitch.getAttribute('aria-expanded') === 'true';
+    if (forceClose) {
+        toggleSwitch.setAttribute('aria-expanded', 'false');
+        converterContent.classList.add('hidden');
+    } else {
+        toggleSwitch.setAttribute('aria-expanded', !isExpanded);
+        converterContent.classList.toggle('hidden');
+    }
+}
+
+const STORAGE_KEY = 'storyboards';
+
 function createStoryboard(title) {
     return {
         id: Date.now().toString(),
-        title,
+        title: title,
         scenes: [],
-        lastEdited: new Date().toISOString(),
+        lastEdited: new Date().toISOString()
     };
 }
 
 function createScene(number) {
     return {
-        id: `${Date.now()}-${number}`,
-        number,
+        id: Date.now().toString() + '-' + number,
+        number: number,
         voScript: '',
         files: [],
-        notes: '',
+        notes: ''
     };
 }
 
@@ -76,7 +66,6 @@ function getStoryboards() {
         return data ? JSON.parse(data) : [];
     } catch (error) {
         console.error('Error reading from storage:', error);
-        toast.error('Failed to load storyboards.');
         return [];
     }
 }
@@ -87,84 +76,94 @@ function saveStoryboards(storyboards) {
         return true;
     } catch (error) {
         console.error('Error saving to storage:', error);
-        toast.error('Failed to save storyboards.');
         return false;
     }
 }
 
 function breakIntoScenes(text) {
-    if (!text || typeof text !== 'string' || !text.trim()) {
-        throw new Error('Input must be a non-empty string.');
+    if (!text || typeof text !== 'string') {
+        throw new Error('Invalid input: text must be a non-empty string');
     }
-
     const sceneTexts = text.split('।')
         .map(s => s.trim())
-        .filter(Boolean);
-
+        .filter(s => s);
+    
     if (sceneTexts.length === 0) {
-        throw new Error('No valid scenes found in the input text.');
+        throw new Error('No valid scenes found in the input text');
     }
 
-    const storyboard = createStoryboard('Imported Script');
-    storyboard.scenes = sceneTexts.map((text, index) => ({
-        ...createScene(index + 1),
-        voScript: text,
-    }));
+    // Create storyboard in the same format as storage.js
+    const storyboard = createStoryboard('Untitled');
+    storyboard.scenes = sceneTexts.map((text, index) => {
+        const scene = createScene(index + 1);
+        scene.voScript = text;
+        return scene;
+    });
 
+    // Get existing storyboards and add new one at the beginning
     const storyboards = getStoryboards();
     storyboards.unshift(storyboard);
-
-    if (!saveStoryboards(storyboards)) {
-        throw new Error('Failed to save storyboard.');
-    }
-
+    saveStoryboards(storyboards);
+    
     return storyboard;
 }
 
-// Main Convert Button Logic
-convertButton?.addEventListener('click', async () => {
-    if (!scriptInput) return;
-
+convertButton.addEventListener('click', async () => {
     const text = scriptInput.value.trim();
-
+    
     if (!text) {
         toast.error('Please enter your script before converting.');
         return;
     }
-
+    
     convertButton.disabled = true;
-
+    
     try {
         const storyboard = breakIntoScenes(text);
-
+        
+        // Show success message
         toast.success('Script converted successfully!');
+        
+        // Clear the input
         scriptInput.value = '';
+        
+        // Close the toggle
         toggleConverter(true);
-
+        
+        // Show preview of the created storyboard
         previewManager.renderPreview(storyboard);
-
-        // Add listeners for buttons in preview page
+        
+        // Add event listeners for preview page buttons
         const editBtn = document.getElementById('backToEditBtn');
         const exportBtn = document.getElementById('exportBtn');
-
+        
         if (editBtn) {
             editBtn.onclick = () => {
                 sceneManager.loadStoryboard(storyboard);
                 showPage('editorPage');
+                
+                // Ensure the preview button in editor works with this storyboard
+                const previewFromEditorBtn = document.getElementById('previewFromEditor');
+                if (previewFromEditorBtn) {
+                    previewFromEditorBtn.onclick = () => {
+                        previewManager.renderPreview(storyboard);
+                        showPage('previewPage');
+                    };
+                }
             };
         }
-
+        
         if (exportBtn) {
-            exportBtn.onclick = null; // Clear previous listener
-            exportBtn.addEventListener('click', () => {
+            exportBtn.onclick = () => {
                 const success = storage.exportToCsv(storyboard);
                 if (!success) {
                     toast.error('Error exporting storyboard. Please check the console for details.');
                 }
-            });
+            };
         }
-
+        
         showPage('previewPage');
+        
     } catch (error) {
         console.error('Conversion error:', error);
         toast.error(`Conversion failed: ${error.message}`);
