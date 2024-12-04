@@ -612,6 +612,8 @@ textarea:focus {
     gap: 8px;
 }
 
+/*
+
 .toggle-content h3 {
     font-size: 1.75rem;
     font-weight: 600;
@@ -619,17 +621,17 @@ textarea:focus {
     margin: 0;
     text-align: left;
 }
-
+*/
 .triangle-icon {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     fill: #4a90e2;
     transition: transform 0.3s ease;
     flex-shrink: 0;
 }
 
 .section-toggle[aria-expanded="false"] .triangle-icon {
-    transform: rotate(180deg);
+    transform: rotate(90deg);
 }
 
 #converterContent {
@@ -725,7 +727,7 @@ textarea:focus {
 
  /* .title-input {
     font-size: 1.125rem;
-  }*/
+ }
 
 .toggle-content h2 {
         font-size: 1.5rem;
@@ -739,6 +741,8 @@ textarea:focus {
         height: 250px;
         font-size: 0.95rem;
     }
+
+  */
 
   .btn {
     width: 100%;
