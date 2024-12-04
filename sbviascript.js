@@ -86,7 +86,7 @@ function breakIntoScenes(text) {
     }
 
     // Create storyboard in the same format as storage.js
-    const storyboard = createStoryboard('Imported Script');
+    const storyboard = createStoryboard('Untitled');
     storyboard.scenes = sceneTexts.map((text, index) => {
         const scene = createScene(index + 1);
         scene.voScript = text;
@@ -123,7 +123,7 @@ convertButton.addEventListener('click', async () => {
         
         // Show success message
         updateStatus('Script converted successfully!');
-        toast.success('Script converted successfully!');
+        toast.success('Successfully created via Script!');
         
         // Clear the input
         scriptInput.value = '';
