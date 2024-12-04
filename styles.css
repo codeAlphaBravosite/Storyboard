@@ -643,7 +643,7 @@ textarea:focus {
     width: 100%;
     max-height: 1000px;
     overflow: hidden;
-    margin-bottom: 1.2rem;
+    margin-bottom: 1.3rem;
 }
 
 #converterContent.hidden {
