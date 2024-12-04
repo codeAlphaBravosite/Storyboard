@@ -628,8 +628,8 @@ textarea:focus {
 }
 
 .triangle-icon {
-    width: 17px;
-    height: 17px;
+    width: 15px;
+    height: 15px;
     fill: var(--text-color);
     transition: transform 0.3s ease;
     flex-shrink: 0;
@@ -639,6 +639,7 @@ textarea:focus {
     transform: rotate(180deg);
 }
 
+/*
 #converterContent {
     transition: all 0.3s ease;
     width: 100%;
@@ -652,6 +653,7 @@ textarea:focus {
     margin: 0;
     padding: 0;
 }
+*/
 
 /*
 #scriptInput {
@@ -669,7 +671,7 @@ textarea:focus {
 
 #scriptInput {
   width: 100%;
-  min-height: 120px;
+  min-height: 250px;
   padding: 1rem;
   border: 1px solid var(--border-color);
   border-radius: var(--radius);
@@ -681,8 +683,9 @@ textarea:focus {
 }
 
 #convertButton {
+  width: 100%;
   background-color: var(--primary-color);
-  color: var(--text-color);
+  color: white;
   padding: 0.5rem 1rem;
   border-radius: var(--radius);
   border: none;
@@ -697,6 +700,7 @@ textarea:focus {
 }
 
 #convertButton:hover {
+    color: var(--text-color);
     background-color: var(--primary-hover);
 }
 
