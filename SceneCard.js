@@ -18,7 +18,7 @@ export function renderScene(scene) {
         <div class="scene-section-header">
           <span class="scene-section-title">VO/Script</span>
         </div>
-        <textarea class="vo-script" placeholder="Enter VO/Script content here...">${sanitizeHTML(scene.voScript)}</textarea>
+        <textarea class="vo-script" placeholder="Enter VO/Script content here..." spellcheck="false">${sanitizeHTML(scene.voScript)}</textarea>
       </div>
       
       <div class="scene-section">
@@ -35,7 +35,7 @@ export function renderScene(scene) {
         <div class="scene-section-header">
           <span class="scene-section-title">Notes</span>
         </div>
-        <textarea class="scene-notes" placeholder="Add any additional notes here...">${sanitizeHTML(scene.notes)}</textarea>
+        <textarea class="scene-notes" placeholder="Add any additional notes here..." spellcheck="false">${sanitizeHTML(scene.notes)}</textarea>
       </div>
     </div>
   `;
@@ -46,8 +46,8 @@ export function renderScene(scene) {
 export function renderFile(file) {
   return `
     <div class="file-entry" data-id="${file.id}">
-      <input type="text" class="file-name" value="${sanitizeHTML(file.name)}" placeholder="Filename">
-      <input type="text" class="file-timestamp" value="${sanitizeHTML(file.timestamp)}" placeholder="Timestamp">
+      <input type="text" class="file-name" value="${sanitizeHTML(file.name)}" placeholder="Filename" spellcheck="false">
+      <input type="text" class="file-timestamp" value="${sanitizeHTML(file.timestamp)}" placeholder="Timestamp" spellcheck="false">
       <label class="file-final-label">
         <input type="checkbox" class="file-final" ${file.isFinal ? 'checked' : ''}>
         Final
