@@ -397,14 +397,16 @@ body {
 textarea {
   width: 100%;
   min-height: 120px;
+  height: auto;
   padding: 1rem;
   border: 1px solid var(--border-color);
   border-radius: var(--radius);
-  resize: vertical;
+  resize: none; /* Disables manual resizing */
   font-family: inherit;
   background-color: var(--card-background);
   font-size: 0.9375rem;
   line-height: 1.6;
+  overflow: hidden; /* Hides scrollbars */
 }
 
 textarea:focus {
