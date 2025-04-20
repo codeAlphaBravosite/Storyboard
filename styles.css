@@ -501,7 +501,7 @@ textarea:focus {
 }
 
 .section-content.vo-script {
-  white-space: normal; /* Makes the text wrap naturally */
+  white-space: pre-wrap; /* Makes the text wrap naturally */
   word-wrap: break-word; /* Prevents long words from breaking the layout */
   text-align: left;
   font-family: 'Inter', monospace;
