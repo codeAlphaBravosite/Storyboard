@@ -77,6 +77,28 @@
     <script type="module" src="./preview.js"></script>
     <script type="module" src="./app.js"></script>
     <script>
+    // Auto-resize function for textareas
+    function autoResizeTextareas() {
+      document.querySelectorAll('textarea').forEach(textarea => {
+        // Reset height to eliminate any previous expansion
+        textarea.style.height = 'auto';
+        // Set height to match content
+        textarea.style.height = textarea.scrollHeight + 'px';
+        
+        // Add input event listener to each textarea for dynamic resizing
+        textarea.addEventListener('input', function() {
+          this.style.height = 'auto';
+          this.style.height = this.scrollHeight + 'px';
+        });
+      });
+    }
+
+    // Run when DOM is loaded
+    document.addEventListener('DOMContentLoaded', autoResizeTextareas);
+    // Also run it immediately in case DOM is already loaded
+    autoResizeTextareas();
+    </script>
+    <script>
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
       navigator.serviceWorker.register('./sw.js')
